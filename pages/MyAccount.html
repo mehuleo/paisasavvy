@@ -1,0 +1,587 @@
+<div class="navbar">
+    <div class="logo"></div>
+    <ul class="menu-items">
+        <li style="color: #607D8B; text-transform: capitalize;">
+            Welcome {{" " + user.name.toLowerCase()}}!
+        </li>
+        <li ng-click="getDebitCard()" ng-if="!user.CardAplicationStatus">Apply For Debit Card</li>
+        <li ng-click="getDebitStatus()" ng-if="user.CardAplicationStatus">Check Debit Card Status</li>
+        <li ng-click="showWithdrawMoney()">Withdraw Money</li>
+        <li ng-click="doLogout()">Log Out</li>
+    </ul>
+</div>
+<!-- //Nav -->
+<div style="height: 120px;"></div>
+<!--  -->
+<div class="h-section">
+    <div class="small-box risk-o-meter">
+        <div style="line-height: 34px; font-size: 16px; font-weight: 500; color: #607D8B; margin: 0px 0px 8px 0px; text-align: center;">
+            Investment Risk Status
+        </div>
+        <div style="background-image: url(assets/risk-o-meter.jpg); width: 100%; height: 100px; background-position: center; background-repeat: no-repeat;">
+            
+        </div>
+        <div style="line-height: 34px;font-size: 14px;font-weight: 500;col;color: #343434;letter-spacing: .89px;text-align: center;">
+            Low Risk
+        </div>
+        <div style="line-height: 34px;font-size: 14px;font-weight: 500;color: #227dfb;margin: 0px 0px 8px 0px;text-align: center;letter-spacing: .55px; cursor: pointer; outline: none;" ng-click="adjustRisk()">
+            Change Risk Status
+        </div>
+        <div class="hr" style="width: 500px; margin: 34px 0px 0px -34px;"></div>
+        <div style="line-height: 34px;font-size: 12px;font-weight: 500;color: #607D8B;line-height: 16px;text-align: center;letter-spacing: .55px;margin: 13px 0px 0px;">
+            You'll be able to adjust risk once there's enough money in your account.
+        </div>
+    </div>
+    <div class="wide-box history">
+        <div style="line-height: 34px; font-size: 16px; font-weight: 500; color: #607D8B; margin: 0px 0px 8px 0px;">
+            Transaction History
+        </div>
+        <div class="transactions" style="border-width: 0; font-size: 14px;" ng-hide="passbook.length || transactionList.length">
+            Please add money to your account to get started. 
+        </div>
+        <div class="transactions" style="border-width: 0; color: #bbb !important" ng-if="passbook.length || transactionList.length">
+            <!-- <div class="trxn-icon"></div> -->
+            <div class="trxn-date">Date</div>
+            <div class="trxn-remark">Remark</div>
+            <div class="trxn-type">Type</div>
+            <div class="trxn-amount" style="color: inherit;font-family: inherit;font-size: inherit;font-weight: inherit;">Amount</div>
+        </div>
+        <div class="transactions" ng-repeat="d in passbook track by $index">
+            <!-- <div class="trxn-icon"></div> -->
+            <div class="trxn-date">{{d.entry_date | date : "MMM dd"}}</div>
+            <div class="trxn-remark">Remark: {{d.remark}}</div>
+            <div class="trxn-type">{{d.transaction_desc}} (Pending)</div>
+            <div class="trxn-amount gray">
+                {{d.amount | IndianCurrency}}
+            </div>
+        </div>
+        <div class="transactions" ng-repeat="d in transactionList track by $index">
+            <!-- <div class="trxn-icon"></div> -->
+            <div class="trxn-date">{{d.transaction_date | date : "MMM dd"}}</div>
+            <div class="trxn-remark">{{d.mf}}</div>
+            <div class="trxn-type">{{d.transaction_desc}}</div>
+            <div class="trxn-amount" ng-class="{red: d.transaction_head == 'R'}">
+                <span ng-if="d.transaction_head == 'R' && d.amount>0">-</span>{{d.amount | IndianCurrency}}
+            </div>
+        </div>
+    </div>
+    <div class="small-box " style="padding: 18px 24px;">
+        <div style="margin: 0px 0px 0px;">
+            <div class="currency" style="display: inline-block; line-height: 48px; margin: 0; color: #555; font-size: 16px; font-weight: 500; vertical-align: top;">Rs.</div>
+            <div class="balance" style="display: inline-block; line-height: 54px; color: #000; font-family: 'Open Sans', 'Raleway'; font-size: 34px; letter-spacing: -.89px; vertical-align: bottom ">
+                {{(balance.currentAmount + balance.unsettledAmount) | IndianCurrency}}
+            </div>
+        </div>
+        <div style="margin: 2px auto 0px; font-size: 12px; font-weight: 500; letter-spacing: .55px;">
+            <span style="color: #607D8B;">Deposits: </span>
+            <span style="color: #555; font-weight: 600;">
+                ₹ {{balance.invstedAmount | IndianCurrency}}
+            </span>
+        </div>
+        <div style="margin: 18px auto 0px; font-size: 16px; font-weight: 500; color: #2196F3;">
+            + {{balance.gainPercentage | number: 2}}% ( ₹ {{balance.gainRupee | IndianCurrency}})
+        </div>
+        <button ng-click="showAddMoney()" style="margin: 34px auto 0px; width: 100%; border: none; background: #4C83FB; line-height: 40px; border-radius: 40px; color: #FFF; font-size: 14px; font-weight: 500; box-shadow: 0px 8px 21px rgba(76, 131, 251, 0.34);">
+            ADD Money
+        </button>
+        <div class="hr" style="width: 500px; margin: 34px 0px 0px -34px;"></div>
+        <div style="margin: 34px auto 0px; font-size: 12px; font-weight: 500; letter-spacing: .55px; text-align: center;">
+            <div style="display: inline-block; width: 48%; vertical-align: top">
+                <span style="color: #607D8B; font-size: 10px;">Instant Withdraw</span>
+                <br />
+                <span style="line-height: 34px; color: #555; font-size: 16px; font-weight: 600;">
+                    ₹ {{balance.instantWithdraw | IndianCurrency}}
+                </span>
+            </div>
+            <div style="display: inline-block; width: 48%; vertical-align: top">
+                <span style="color: #607D8B; font-size: 10px;">Unsettled Amount</span>
+                <br />
+                <span style="line-height: 34px; color: #555; font-size: 16px; font-weight: 600;">
+                    ₹ {{balance.unsettledAmount | IndianCurrency}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- POPUP -->
+<div style="height: 89px;"></div>
+<div class="popup-cover" ng-if="showWithdrawBox || showPaymentOption">
+    <div class="popup" ng-if="showWithdrawBox">
+        <span class="close-btn" ng-click="closeAllPopup()">X</span>
+        <h2>
+            Withdraw money
+        </h2>
+        <p style="margin: 21px auto 34px; text-align: center; width: 100%;" ng-show="balance.instantWithdraw > 0">
+            Any amount between Rs.500 and Rs.{{balance.instantWithdraw|IndianCurrency}} will be deposited in your bank withing few seconds. Please note, in a very few cases transfer will take up to an hour. Any amount above Rs.{{balance.instantWithdraw|IndianCurrency}} will take 2 working days to get deposited into your bank account.
+        </p>
+        <p style="margin: 21px auto 34px; text-align: center;" ng-hide="balance.instantWithdraw > 0">
+            The withdrawal amount will take T+2 working days to get deposited into your bank account.
+        </p>
+        <input type="text" class="text" ng-model="formData.withdrawAmount" placeholder="Enter amount to withdraw" maxlength="6" style="width: 300px; letter-spacing: 1.3px;" ng-keyup="filterNumbers('withdrawAmount')">
+        <br>
+        <span class="texterror" ng-if="formData.error">{{formData.error}}</span>
+        <br>
+        <button type="button" class="main-cta-btn pink" ng-click="doWithdraw()" style="margin-top: 34px;" ng-hide="loading">
+            Withdraw Money
+        </button>
+        <div class="main-cta-btn pink" style="margin-top: 34px;" ng-show="loading">
+            <div class="loading">
+                <span class="a"></span><span class="b"></span><span class="c"></span>
+            </div>
+        </div>
+    </div>
+    <div class="popup" ng-if="showPaymentOption">
+        <span class="close-btn" ng-click="closeAllPopup()">X</span>
+        <h2>
+            Deposite money
+        </h2>
+        <p style="margin: 21px auto 34px; text-align: center;">
+            Please enter amount that you want to add.
+        </p>
+        <input type="text" class="text" ng-model="formData.amount" placeholder="Enter Amount" maxlength="6" style="width: 300px; letter-spacing: 1.3px;" ng-keyup="filterNumbers('amount')">
+        <br>
+        <span class="texterror" ng-if="formData.error">{{formData.error}}</span>
+        <br>
+        <button type="button" class="main-cta-btn pink" ng-click="getPaymentLink()" style="margin-top: 34px;" ng-hide="loading">
+            Transfer Money
+        </button>
+        <div class="main-cta-btn pink" style="margin-top: 34px;" ng-show="loading">
+            <div class="loading">
+                <span class="a"></span><span class="b"></span><span class="c"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<div ng-include src="'pages/footer.html'"></div>
+<!--  -->
+<style type="text/css">
+@import url("styles/card.css");
+
+html {
+    height: 100%;
+    width: 100%;
+    background-color: #F5F6FA;
+}
+
+body {
+    margin: 0px auto;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    min-width: 1100px;
+    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-ligatures: no-common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "lnum" 1, "salt" 0;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 0;
+    letter-spacing: .8px;
+    background-color: transparent;
+}
+
+body>.ng-scope {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+a.disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+
+.navbar {
+    position: relative;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 55px;
+    /*border-bottom: 1px solid rgba(0,0,0,.1);*/
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.navbar>.logo {
+    display: inline-block;
+    margin-left: 60px;
+    height: 60px;
+    width: 100px;
+    background-image: url(assets/logo-100px-E91E63.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    vertical-align: middle;
+    opacity: .7;
+}
+
+.navbar .menu-items {
+    position: absolute;
+    display: block;
+    top: 60px;
+    right: 0px;
+    width: 650px;
+    height: 55px;
+    line-height: 55px;
+    margin: -60px auto 0;
+    padding: 0;
+    list-style-type: none;
+    vertical-align: middle;
+}
+
+.navbar .menu-items li {
+    float: left;
+    margin: 0px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .34px;
+    color: #2196F3;
+    color: #1976D2;
+    color: #212121;
+    color: #E91E63;
+    cursor: pointer;
+    outline: none;
+}
+
+.navbar .menu-items li:hover {
+    color: #212121;
+}
+
+
+/* ------ Dashboard -------*/
+
+.h-section {
+    text-align: center;
+}
+
+.small-box {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    height: 350px;
+    padding: 24px 24px;
+    border: 1px solid #e6eaf2;
+    /*border-radius: 5px;*/
+    background: #FFF;
+    box-sizing: border-box;
+    text-align: left;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.wide-box {
+    position: relative;
+    display: inline-block;
+    width: 500px;
+    height: 350px;
+    padding: 24px 24px;
+    margin: 0px 21px 0px -5px;
+    border: 1px solid #e6eaf2;
+    /*border-width: 1px 1px 1px 0px;*/
+    /*border-radius: 5px;*/
+    background: #FFF;
+    box-sizing: border-box;
+    text-align: left;
+    vertical-align: top;
+    overflow-y: scroll;
+}
+
+
+/* ------  -------*/
+
+.mybalance-container {
+    display: inline-block;
+    position: relative;
+    margin: 0px 13px;
+    padding: 0px 5px;
+    color: #607D8B;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+}
+
+.mybalance-container>.label1 {
+    display: block;
+    color: #546E7A;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .55px;
+    text-align: right;
+}
+
+.currency {
+    display: inline-block;
+    line-height: 48px;
+    margin: 0;
+    color: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    vertical-align: top;
+}
+
+.balance {
+    display: inline-block;
+    line-height: 54px;
+    color: inherit;
+    font-family: "Open Sans";
+    font-size: 34px;
+    font-weight: 300;
+    letter-spacing: -.89px;
+    vertical-align: bottom;
+}
+
+.mybalance-container>.label2 {
+    display: block;
+    color: #1DAD22;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .55px;
+    text-align: right;
+}
+
+.mybalance-container.big>.currency {
+    line-height: 46px;
+    font-size: 16px;
+}
+
+.mybalance-container.big {
+    margin: 0px 34px 0px 0px;
+}
+
+.mybalance-container.big>.balance {
+    line-height: 70px;
+    font-size: 60px;
+    /*letter-spacing: 0px;*/
+}
+
+.mybalance-container>.label2.red {
+    color: #E91E63;
+}
+
+.mybalance-container>.label2>.see-on-hover {
+    display: none;
+}
+
+.mybalance-container>.label2:hover>.see-on-hover {
+    display: inline;
+}
+
+.mybalance-container.col-green {
+    color: #43A047;
+}
+
+.mybalance-container.col-red {
+    color: #EC407A;
+}
+
+.mybalance-container.col-blue {
+    color: #00BCD4;
+}
+
+.mybalance-container>.see-on-hover {
+    display: none;
+}
+
+.mybalance-container:hover>.see-on-hover {
+    display: block;
+}
+
+.mybalance-container:hover>.hide-on-hover {
+    display: none;
+}
+
+
+/*  ------  */
+
+.line-chart {
+    display: block;
+    height: 200px;
+    width: 800px;
+    margin: 0 auto;
+    background: transparent;
+    vertical-align: top;
+}
+
+.line-chart .x-axis path,
+.line-chart .y-axis path,
+.line-chart .x-axis .tick line,
+.line-chart .y-axis .tick line {
+    opacity: 0.34;
+}
+
+.line-chart .x-axis,
+.line-chart .y-axis {
+    opacity: 0.34;
+}
+
+.line-chart .dummy-line {
+    fill: url(#liner-grad);
+    stroke: none;
+    stroke-width: 0px;
+}
+
+.line-chart .chart-line {
+    fill: none;
+    stroke: #03A9F4;
+    stroke-width: 1px;
+}
+
+button.main-cta-btn.localfix {
+    /*min-width: 200px;*/
+    /*min-width: auto;*/
+    height: 46px;
+    line-height: 46px;
+    margin: 0 13px;
+    font-size: 15px;
+}
+
+.transactions {
+    position: relative;
+    height: 34px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    color: #37474F;
+    font-size: 13px;
+    /* border-radius: 3px; */
+    border-bottom: 1px solid #DCE2E67D;
+    background-color: transparent;
+    background-color: #FFF;
+    overflow: hidden;
+}
+
+.transactions:hover {
+    /*border-radius: 5px;*/
+    /*box-shadow: 0 0px 38px rgba(0, 0, 0, 0.30), 0 0px 12px rgba(0, 0, 0, 0.22);*/
+    /*z-index: 1;*/
+}
+
+.transactions>.trxn-type {
+    display: inline-block;
+    width: 70px;
+    line-height: 34px;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    vertical-align: top;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.transactions>.trxn-date {
+    display: inline-block;
+    width: 55px;
+    line-height: 35px;
+    padding: 0;
+    text-align: left;
+    vertical-align: top;
+}
+
+.transactions>.trxn-remark {
+    display: inline-block;
+    line-height: 34px;
+    vertical-align: top;
+    width: 228px;
+    margin-right: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.transactions>.trxn-amount {
+    display: inline-block;
+    width: 70px;
+    line-height: 34px;
+    color: #43A047;
+    color: #039BE5;
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 12px;
+    text-align: right;
+    vertical-align: top;
+}
+
+.transactions>.trxn-amount.red {
+    color: #F06292;
+}
+
+.transactions>.trxn-amount.gray {
+    color: #607D8B;
+}
+
+.hr {
+    width: 100%;
+    height: 1px;
+    max-width: 1100px;
+    margin: 0px auto;
+    background-color: #CFD8DC;
+}
+
+.popup-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .55);
+    z-index: 12;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 89%;
+    max-width: 500px;
+    height: 380px;
+    padding: 34px 21px;
+    margin: auto;
+    background: #FFFFFF;
+    text-align: center;
+    z-index: 13;
+    overflow: hidden;
+}
+
+.popup>h2 {
+    width: 89%;
+    text-align: center;
+}
+
+.popup>.close-btn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 21px;
+    font-weight: 600;
+    background: #EEEEEE;
+    cursor: pointer;
+}
+
+
+/* ------  -------*/
+</style>

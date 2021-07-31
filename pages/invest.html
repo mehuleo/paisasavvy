@@ -1,0 +1,202 @@
+<div class="navbar">
+	<span class="logo-medium"></span>
+    <div class="progress" style="width: {{stepProgress}}%;"></div>
+</div>
+<!-- //Nav -->
+<!-- Step tracker -->
+<div class="step-tracker">
+    <span class="step-back" ng-click="back()" ng-if="card>1">
+        <span class="back-icon">&#9668;</span> Back
+    </span>
+    <span class="step-count">3/5</span>
+    <span class="progress-container"></span>
+    <span class="progress-bar" style="width:{{stepProgress}}%;"></span>
+    <span class="current-step" style="left:{{stepProgress}}%">Invest</span>
+</div>
+<!-- // Step tracker -->
+<br><br><br>
+<!-- --------------- CARD 1 ------------------------- -->
+<div class="card" ng-if="card == 1">
+    <span class="invest-icon"></span>
+    <span class="big">
+        Do you know how much to invest 
+        <br>for saving tax this year?
+    </span>
+    <p class="center">
+        You can invest up to Rs. 1,50,000 under section 80C.
+    </p>
+    <br><br><br><br>
+    <center>
+        <span class="label">Yes, I want to invest Rs. </span>
+        <input type="text" class="text" ng-model="data.amount" placeholder="Amount" ng-keyup="filterNumbers('amount')" style="width: 100px;">
+        <md-slider class="slider" step="1000" min="0" max="150000" ng-model="data.amount" ></md-slider>
+    </center>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br><br><br><br><br>
+    <center>
+        <input type="button" class="submit2" value="I don't know, help me out" ng-click="next()"/>
+        <input type="button" class="submit" value="Next" ng-click="showFunds()"/>
+    </center>
+</div>
+<!-- --------------- CARD 2 ------------------------- -->
+<div class="card" ng-if="card == 2">
+    <span class="invest-icon"></span>
+    <span class="big">
+        How much do you invest in PPF?
+    </span>
+    <p class=""> 
+        PPF (Public Provident Fund) offered by banks (Not the PF deducted from your salary).
+        This is the one with minimum 15 year lock-in period.
+        If you don't know what is this then probably you're not investing in this,
+        in that case click on NEXT.
+    <br><br><br>
+    <center>
+        <input type="text" class="text" ng-model="data.ppf" placeholder="0" ng-keyup="filterNumbers('ppf')">
+    </center>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br><br><br><br><br>
+    <center>
+        <input type="button" class="submit" value="Next" ng-click="next()"/>
+    </center>
+</div>
+<!-- --------------- CARD 3 ------------------------- -->
+<div class="card" ng-if="card == 3">
+    <span class="big">
+        How much do you invest in NSC?
+    </span>
+    <p class=""> 
+        NSC (National Savings Certificate) offered by post office.
+        This is the one with minimum 5 year lock-in period.
+        If you don't know what is this then probably you're not investing in this, 
+        in that case click on NEXT.
+    </p>
+    <br><br><br>
+    <center>
+        <input type="text" class="text" ng-model="data.nsc" placeholder="0" ng-keyup="filterNumbers('nsc')">
+    </center>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br><br><br><br><br>
+    <center>
+        <input type="button" class="submit" value="Next" ng-click="next()"/>
+    </center>
+</div>
+<!-- --------------- CARD 4 ------------------------- -->
+<div class="card" ng-if="card == 4">
+    <span class="big">
+        How much do you invest in 5 year FD?
+    </span>
+    <p class=""> 
+        TAX saving 5 Year FD (Fixed Deposite) offered by Banks or post offices.
+        This is the one with minimum 5 year lock-in period.
+        If you don't know what is this then probably you're not investing in this, in that case click on NEXT.
+    </p>
+    <br><br><br>
+    <center>
+        <input type="text" class="text" ng-model="data.fd" placeholder="0" ng-keyup="filterNumbers('fd')">
+    </center>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br><br><br><br><br>
+    <center>
+        <input type="button" class="submit" value="Next" ng-click="next()"/>
+    </center>
+</div>
+<!-- --------------- CARD 5 ------------------------- -->
+<div class="card" ng-if="card == 5">
+    <span class="big">
+        How much are you paying for Insurance Policy?
+    </span>
+    <p class=""> 
+        If you have taken any life insurance policy under your name.
+        This is deductible under 80C.
+    <br><br><br>
+    <center>
+        <input type="text" class="text" ng-model="data.lic" placeholder="0" ng-keyup="filterNumbers('lic')">
+    </center>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br><br><br><br><br>
+    <center>
+        <input type="button" class="submit" value="Next" ng-click="next()"/>
+    </center>
+</div>
+<!-- --------------- CARD 6 ------------------------- -->
+<div class="card" ng-if="card == 6">
+    <span class="big">
+        How much are you paying for School Fees?
+    </span>
+    <p class=""> 
+        If you are paying for your children's education fees.
+        This is deductible under 80C.
+    </p>
+    <br><br><br>
+    <center>
+        <input type="text" class="text" ng-model="data.fees" placeholder="0" ng-keyup="filterNumbers('fees')">
+    </center>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br><br><br><br><br>
+    <center>
+        <input type="button" class="submit" value="Next" ng-click="next()"/>
+    </center>
+</div>
+<!-- --------------- CARD 7 ------------------------- -->
+<div class="card" ng-if="card == 7">
+    <span class="big">
+        What is your yearly income?
+    </span>
+    <p class=""> 
+        Your yearly income helps us calculate the maximum amount of TAX you can save. If you are not comfortable with sharing this information, you can skip this step.
+    </p>
+    <br><br><br>
+    <center>
+        <span class="label">{{(data.income|currency:'&#8377; ':0) || '&#8377; 0'}} / year</span>
+        <md-slider class="slider" step="100000" min="100000" max="4000000" ng-model="data.income" ></md-slider>
+    </center>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br><br><br><br><br>
+    <center>
+        <input type="button" class="submit2" value="Skip" ng-click="next()"/>
+        <input type="button" class="submit" value="Next" ng-click="next()"/>
+    </center>
+</div>
+<!-- --------------- CARD 8 ------------------------- -->
+<div class="card" ng-if="card == 8">
+    <span class="big">
+        What is your age?
+    </span>
+    <p class=""> 
+        Your age helps us figure out the maximum risk you can take. If you are not comfortable with sharing this information, you can skip this step.
+    </p>
+    <br><br><br>
+    <center>
+        <span class="label">I am {{data.age}} years old.</span>
+        <md-slider class="slider" step="1" min="18" max="45" ng-model="data.age" ></md-slider>
+    </center>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br><br><br><br><br>
+    <center>
+        <input type="button" class="submit2" value="Skip" ng-click="toFunds()"/>
+        <input type="button" class="submit" value="Next" ng-click="toFunds()"/>
+    </center>
+</div>
+<!-- --------------- //CARD  ------------------------- -->
+<br><br><br>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+<br><br>
+<style type="text/css">
+.invest-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    background-image: url(assets/investing.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 100px;
+}
+</style>

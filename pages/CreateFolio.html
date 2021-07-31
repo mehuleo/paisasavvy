@@ -1,0 +1,141 @@
+<div class="navbar">
+    <div class="logo"></div>
+    <ul class="menu-items">
+        <!-- <li></li> -->
+        <!-- <a href="">
+            <li>Log Out</li>
+        </a> -->
+    </ul>
+</div>
+<!-- //Nav -->
+<div style="height: 89px;"></div>
+<!-- Step tracker -->
+<div class="step-tracker">
+    <span class="step-back">
+        &nbsp;
+        <!-- <span class="back-icon">&#9668;</span> Back -->
+    </span>
+    <span class="step-count">4/5</span>
+    <span class="progress-container"></span>
+    <span class="progress-bar" style="width:{{stepProgress}}%;"></span>
+    <span class="current-step" style="left:{{stepProgress}}%" ng-click="postmsg()">Create Folio</span>
+</div>
+<!-- // Step tracker -->
+<center>
+    <!-- <iframe src="https://investeasy.reliancemutual.com/online/simplysavepartner/onboardzbf?PAN=BURPM5269F&Arncode=ARN-127961&name=MEHUL MARAKANA&scheme=LF&plan=IG&option=G&email=mehul.marakana@gmail.com&mobile=8792476875&dob=29/07/1989&RI=Y&PEP=N&RPEP=N&PTI=Y&BII=Y&TAX=INDIVIDUAL&OCCUP=1&INCOME=10-25L&IFSC=&ACTYPE=&ACNUM=&EdFlag=&ResponseURL=https://www.paisasavvy.com/" class="karvy-i"></iframe> -->
+    <iframe ng-src="{{createFolioURL}}" class="karvy-i"></iframe>
+</center>
+<style type="text/css">
+@import url("styles/card.css");
+html {
+    height: 100%;
+    width: 100%;
+    background-color: #F5F6FA;
+}
+
+body {
+    margin: 0px auto;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
+    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-ligatures: no-common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "lnum" 1, "salt" 0;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 0;
+    letter-spacing: .8px;
+    background-color: transparent;
+}
+
+body>.ng-scope {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: none;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+a.disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+
+.navbar {
+    position: relative;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    background-color: rgba(255,255,255,.92);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.navbar > .logo {
+    display: inline-block;
+    margin-left: 60px;
+    height: 60px;
+    width: 100px;
+    background-image: url(assets/logo-100px-E91E63.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    vertical-align: middle;
+    opacity: .7;
+}
+
+.navbar .menu-items {
+    position: absolute;
+    display: block;
+    top: 60px;
+    right: 0px;
+    width: 400px;
+    height: 55px;
+    line-height: 55px;
+    margin: -60px auto 0;
+    padding: 0;
+    list-style-type: none;
+    vertical-align: middle;
+}
+
+.navbar .menu-items li {
+    float: left;
+    margin: 0px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .34px;
+    color: #2196F3;
+    color: #1976D2;
+    color: #212121;
+    color: #E91E63;
+    cursor: pointer;
+}
+
+.navbar .menu-items li:hover {
+    color: #212121;
+}
+/* ----- -------- */
+iframe.karvy-i {
+    width: 89%;
+    max-width: 1000px;
+    height: 1300px;
+    margin: 34px auto;
+    background-color: transparent;
+    border: none;
+}
+</style>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html ng-app="PaisaSavvy">
+
+<head>
+    <title>PaisaSavvy - Smart Savings Account</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <meta name="google-site-verification" content="aXZsKayLy28FzAbrTF_MCACvhpQpS3z6owzEk_H_gKI" />
+    <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"> -->
+    <!-- Desc -->
+    <!-- For Google -->
+    <meta name="description" content="Best Savings Account, with auto invest features. Expect more from your money. Let PaisaSavvy do it for you." />
+    <meta name="keywords" content="Smart Savings Account, upto 7% Return, Mutual Funds, Auto Invest, Investment, TAX Saving, 2018, FY, 2018-19" />
+    <meta name="author" content="Anaglyph Advisory Services Pvt. Ltd." />
+    <meta name="copyright" content="2017 Anaglyph Advisory Services Pvt. Ltd." />
+    <meta name="application-name" content="PaisaSavvy" />
+    <!-- For Facebook -->
+    <meta property="og:title" content="Smart Savings Account With 6-8% Return" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://www.paisasavvy.com/assets/slide1-img.jpg" />
+    <meta property="og:url" content="https://www.paisasavvy.com/" />
+    <meta property="og:description" content="Best Savings Account solution for your idle and liquid money needs. With auto sweep-in and auto invest features." />
+    <!-- For Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@paisasavvy" />
+    <meta name="twitter:title" content="Smart Savings Account With 6-8% Return" />
+    <meta name="twitter:description" content="Best Savings Account solution for your idle and liquid money needs. With auto sweep-in and auto invest features." />
+    <meta name="twitter:image" content="https://www.paisasavvy.com/assets/slide1-img.jpg" />
+    <!-- --------------------------------------------- -->
+    <!-- Style -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/raleway.css" />
+    <link rel="stylesheet" type="text/css" href="styles/nav.css" />
+    <link rel="stylesheet" type="text/css" href="styles/step-tracker.css" />
+    <link rel="stylesheet" type="text/css" href="styles/common.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="styles/card.css" /> -->
+    <link rel="stylesheet" href="styles/animate.min.css">
+    <!-- lib -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.9/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-sanitize.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="assets/sweetalert.min.js" charset="utf-8"></script>
+    <script src="assets/siema.min.js" charset="utf-8"></script>
+    <!-- App -->
+    <script src="PaisaSavvy.js" charset="utf-8"></script>
+    <script src="config.js" charset="utf-8"></script>
+    <!-- Controllers -->
+    <!-- <script src="controllers/Landing1.js" charset="utf-8"></script> -->
+    <script src="controllers/Landing2.js" charset="utf-8"></script>
+    <script src="controllers/KYCCheck.js" charset="utf-8"></script>
+    <script src="controllers/AadhaarKYC.js" charset="utf-8"></script>
+    <script src="controllers/ClientDetails.js" charset="utf-8"></script>
+    <script src="controllers/CreateFolio.js" charset="utf-8"></script>
+    <script src="controllers/MyAccount.js" charset="utf-8"></script>
+    <script src="controllers/DebitCardApplication.js" charset="utf-8"></script>
+    <script src="controllers/FAQ.js" charset="utf-8"></script>
+    <!-- <script src="controllers/KarvyKYC.js" charset="utf-8"></script> -->
+    <!-- <script src="controllers/Invest.js"></script> -->
+    <!-- <script src="controllers/Payment.js"></script> -->
+    <!-- <script src="controllers/sPayment.js"></script> -->
+    <!-- <script src="controllers/Advise.js"></script> -->
+    <!-- <script src="controllers/Chat.js"></script> -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109521109-1"></script>
+    <script>
+    if (window.location.host.toLowerCase().indexOf("paisasavvy.com") != -1) {
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-109521109-1');
+        // -------------------------------------
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-109521109-1', 'auto');
+        // ga('send', 'pageview');
+    } else {
+        window.ga = console.log;
+    }
+    </script>
+</head>
+
+<body>
+    <div ng-view></div>
+</body>
+<!--  -->
+<style type="text/css">
+html {
+    width: 100%;
+}
+
+body {
+    font-size: 14px;
+    font-family: 'Raleway', 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-weight: 400;
+    -moz-font-feature-settings: "lnum" 1, "salt" 0;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 0;
+    font-feature-settings: "lnum" 1, "salt" 0;
+    font-variant-ligatures: no-common-ligatures;
+    letter-spacing: .3px;
+}
+</style>
+<!--  -->
+<!-- <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrestuvwxyz!?.&'*" rel="stylesheet"> -->
+<!-- <link href="https://fonts.googleapis.com/css?subset=all&family=Raleway:200,300,400,500,600" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300&text=1234567890%,." rel="stylesheet">
+
+</html>

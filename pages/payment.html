@@ -1,0 +1,201 @@
+<div class="navbar">
+	<span class="logo-medium"></span>
+    <div class="progress" style="width: {{stepProgress}}%;"></div>
+</div>
+<!-- //Nav -->
+<!-- Step tracker -->
+<!-- <div class="step-tracker">
+    <span class="step-back" ng-click="toInvest()" ng-if="1">
+        <span class="back-icon">&#9668;</span> Back
+    </span>
+    <span class="step-count">5/5</span>
+    <span class="progress-container"></span>
+    <span class="progress-bar" style="width:{{stepProgress}}%;"></span>
+    <span class="current-step" style="left:{{stepProgress}}%">Review and Pay</span>
+</div> -->
+<!-- // Step tracker -->
+<!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px" viewBox="0 0 100 100" xmlns:svg="http://www.w3.org/2000/svg">
+    <path d="M37.99955740799999,121.99964372899996A60.72630860838506,60.72630860838506,0,1,1,105.99955740799999,120.99964372899996" style="fill:none;stroke:darkturquoise;stroke-width:8px;stroke-linecap:round;transform: scale(.7);"></path>
+    <text style="fill:#343434;font-family:'Open Sans'; font-size:20px;" x="50" y="60" text-anchor="middle">18%</text>
+    <circle cx="37" cy="121" r="8" fill="red" />
+</svg> -->
+<br><br><br>
+<!-- --------------- CARD 1 ------------------------- -->
+<div class="card">
+    <span class="invest-icon"></span>
+    <span class="big">
+        How much do you want to invest this year?
+    </span>
+    <p class="">
+        If you don't know you can use our 
+        <a href="/site1/#!/payment" class="greentext"><b>TAX Calculator</b></a>,
+        You can get TAX benifit upto &#8377; 45,000 under Income TAX section 80C on investment of &#8377; 1,50,000.
+    </p>
+    <br><br>
+    <center>
+        <span class="label" style="vertical-align: middle;">
+            <b>Rs. {{data.amount|currency:'':0}}</b>
+        </span>
+        <md-slider class="slider" step="1000" min="0" max="150000" ng-model="data.amount" style="margin:0;width: 340px;"></md-slider>
+    </center>
+    <!-- <p class="center">
+        Income TAX section 80C has limit of &#8377; 1,50,000.
+        <br>Under this section you are already investing &#8377; 75,000.
+        <br><b>You can invest more &#8377; 35,000 to reduce further &#8377; 10,000 in TAX.</b>
+    </p> -->
+    <br><br>
+    <hr class="">
+    <br>
+    <span class="big">
+        Our ELSS recommendations for investment of &#8377; {{data.amount|currency:'':0}},
+        <!-- <br>with 
+        <md-select ng-model="data.risk" style="display: inline-block; width: 130px;">
+          <md-option value="Low">Low</md-option>
+          <md-option value="Moderate">Moderate</md-option>
+          <md-option value="High">High</md-option>
+        </md-select>
+        Risk  -->
+    </span>
+    <p class="">
+        Below ELSS Fund recommendations are for Moderate Risk Level, you can change risk level below.
+        We recommend you to use our
+        <a href="/site1/#!/payment" class="greentext"><b>Risk Analyser</b></a>,
+        to calculate your risk tolerance before investing in High Risk Funds.
+        
+    </p>
+    <br><br>
+    <div class="fundslist">
+        <span class="fundsname"><b>Scheme Name</b></span>
+        <span class="barchart" style="background-color: transparent;">
+            <b>&nbsp;&nbsp;&nbsp; % of total Investment</b>
+        </span>
+        <span class="fundsvalue"><b>Amount</b></span>
+        <span class="fundsrisk"><b>Risk Level</b></span>
+    </div>
+    <div class="fundslist">
+        <span class="fundsname"> Kotak Long Term </span>
+        <span class="barchart">
+            <span class="barchart-bar" style="width: 50%; background: #E6EE9C; ">
+                50%
+            </span>
+        </span>
+        <span class="fundsvalue">&#8377; {{(data.amount/2)|currency:'':0}}</span>
+        <span class="fundsrisk">Moderately High</span>
+    </div>
+    <div class="fundslist">
+        <span class="fundsname"> Reliance ELSS </span>
+        <span class="barchart">
+            <span class="barchart-bar" style="left: 50%; width: 25%; background: #E6EE9C; ">
+                25%
+            </span>
+        </span>
+        <span class="fundsvalue">&#8377; {{(data.amount/4)|currency:'':0}}</span>
+        <span class="fundsrisk">Moderately High</span>
+    </div>
+    <div class="fundslist">
+        <span class="fundsname"> HDFC Tax Saver Fund </span>
+        <span class="barchart">
+            <span class="barchart-bar" style="left: 75%; width: 25%; background: #E6EE9C; ">
+                25%
+            </span>
+        </span>
+        <span class="fundsvalue">&#8377; {{(data.amount/4)|currency:'':0}}</span>
+        <span class="fundsrisk">Moderate</span>
+    </div>
+    <br>
+    <!-- Total -->
+    <div class="fundslist">
+        <span class="fundsname"> <b>Total </b> </span>
+        <span class="barchart">
+            <span class="barchart-bar" style="width: 100%; background: #80DEEA; ">
+                100%
+            </span>
+        </span>
+        <span class="fundsvalue"><b>&#8377; {{data.amount|currency:'':0}}</b></span>
+        <span class="fundsrisk">
+            <md-select ng-model="data.risk" style="width: 130px; margin: -6px auto 0;">
+                <md-option value="Low">Low</md-option>
+                <md-option value="Moderate">Moderate</md-option>
+                <md-option value="High">High</md-option>
+            </md-select>
+        </span>
+    </div>
+    <br><br>
+    <hr>
+    <br><br>
+    <center>
+        <input type="button" class="submit" value="&nbsp;&nbsp;&nbsp; Invest  Now &nbsp;&nbsp;&nbsp;" ng-click="doPay()"/>
+    </center>
+</div>
+
+<!-- --------------- //CARD  ------------------------- -->
+<br><br><br>
+<p class="wider">
+    PaisaSavvy.com is a member of AMFI, AMFI Registration Number: ARN-127961
+    <br><br>
+    PaisaSavvy.com is only an order and payment collection platform that collects orders and payment on behalf of clients and sends to AMCs for execution. The Client expressly agrees that PaisaSavvy.com or Anagalyph Advisory Services Pvt Ltd is not liable or responsible and does not represent or warrant for any damages regarding delay of order execution or non-execution of orders of the Client due to, but not being limited to, any link/system failure which may occur at the end of the client, PaisaSavvy.com platform
+    <br><br><br>
+    Mutual Funds investments are subject to market risks, read all scheme related documents carefully. Past performance is not an indicator for future returns.
+</p>
+<br><br>
+<style type="text/css">
+/* Table */
+.fundslist {
+    text-align: center;
+    margin: 13px auto;
+}
+.fundsname {
+    display: inline-block;
+    width: 130px;
+    text-align: left;
+    vertical-align: middle;
+}
+.fundsvalue {
+    display: inline-block;
+    width: 89px;
+    text-align: right;
+    vertical-align: middle;
+}
+.fundsrisk {
+    display: inline-block;
+    width: 180px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+.fundsrisk.r1 {
+    background-image: url(/assets/riskometer-r3.png);
+}
+.barchart {
+    position: relative;
+    display: inline-block;
+    width: 210px;
+    height: 20px;
+    margin: 0px 55px;
+    text-align: left;
+    background: #f5f5f5;
+    vertical-align: middle;
+}
+.barchart > .barchart-bar {
+    position: absolute;
+    width: 0%;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    line-height: 20px;
+    padding: 0px 0px 0px 13px;
+    box-sizing: border-box;
+}
+/* Icon */
+.invest-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    background-image: url(assets/investing.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 100px;
+}
+</style>

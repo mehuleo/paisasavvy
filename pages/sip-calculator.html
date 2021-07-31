@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SIP Calculator</title>
+    <link rel="icon" type="image/png" href="https://www.paisasavvy.com/assets/favicon.png" />
+    <meta name="google-site-verification" content="aXZsKayLy28FzAbrTF_MCACvhpQpS3z6owzEk_H_gKI" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+    <meta charset="utf-8">
+    <!-- Desc -->
+    <!-- For Google -->
+    <meta name="description" content="Find out, how much monthly savings can make you a Crorepati. Use our calculator and play with different values to see how long you need to keep saving until you become Crorepati." />
+    <meta name="keywords" content="SIP Calculator, Crorepati Calculator, Millionaire Calculator, How to be a Millionaire, Systematic Investment Plan (SIP), Mutual Fund, Investment" />
+    <meta name="author" content="Anaglyph Advisory Services Pvt. Ltd." />
+    <meta name="copyright" content="2017 Anaglyph Advisory Services Pvt. Ltd." />
+    <meta name="application-name" content="PaisaSavvy" />
+    <!--  -->
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.paisasavvy.com/pages/sip-calculator.html" />
+    <!-- For Facebook -->
+    <meta property="og:title" content="Crorepati Calculator" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://www.paisasavvy.com/assets/promo-banner-1-fb.jpg" />
+    <meta property="og:url" content="https://www.paisasavvy.com/pages/sip-calculator.html" />
+    <meta property="og:description" content="Find out, how much monthly savings can make you a Crorepati. Use our calculator and play with different values to see how long you need to keep saving until you become Crorepati." />
+    <!-- For Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@paisasavvy" />
+    <meta name="twitter:title" content="Crorepati Calculator" />
+    <meta name="twitter:image" content="https://www.paisasavvy.com/assets/promo-banner-1-fb.jpg" />
+    <meta name="twitter:description" content="Find out, how much monthly savings can make you a Crorepati. Use our calculator and play with different values to see how long you need to keep saving until you become Crorepati." />
+    <!-- --------------------------------------------- -->
+    <!-- Style -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" type="text/css" href="https://www.paisasavvy.com/styles/raleway.css" />
+    <!-- <link rel="stylesheet" href="https://www.paisasavvy.com/styles/animate.min.css"> -->
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.9/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <!-- <script src="https://www.paisasavvy.com/assets/sweetalert.min.js" charset="utf-8"></script> -->
+    <!--  -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109521109-1"></script>
+    <script>
+    if (window.location.host.toLowerCase().indexOf("paisasavvy.com") != -1) {
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-109521109-1');
+        // -------------------------------------
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-109521109-1', 'auto');
+        ga('send', 'pageview');
+    } else {
+        window.ga = console.log;
+    }
+    </script>
+</head>
+
+<body>
+    <script>
+    var PaisaSavvy = angular.module("PaisaSavvy", ['ngMaterial']);
+    PaisaSavvy.filter('IndianCurrency', function() {
+        return function(data, withoutPaisa) {
+            return Number(data || 0).toLocaleString('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: withoutPaisa ? 0 : 2,
+                minimumFractionDigits: withoutPaisa ? 0 : 2,
+                currencyDisplay: 'name'
+            }).replace(" Indian rupees", '');
+        };
+    });
+    PaisaSavvy.controller("SIPCalculator", [
+        '$scope', '$location', '$http', '$timeout',
+        function($scope, $location, $http, $timeout) {
+            $scope.SIPCalculatorData = {
+                showCalc: true,
+                title: $location.search().title,
+                desc: $location.search().desc,
+                age: 22,
+                amount: 7000,
+                appraisal: 10,
+                return: 17.5,
+                millionByAge: 28,
+                millionByYear: 6,
+                crorepatiByAge: 37,
+                crorepatiByYear: 15,
+                risk: 5,
+                riskLevel: [
+                    "Cautious",
+                    "Tentative",
+                    "Confident",
+                    "Ambitious",
+                    "Adventurous",
+                ],
+                calcTable: [],
+            };
+            $scope.hideSIPCalculator = function() {
+                $scope.SIPCalculatorData.showCalc = false;
+            };
+            $scope.gotoPath = function(path) {
+                location.href = path;
+            };
+            $scope.SIPCalculatorSetReturn = function() {
+                var returns = [6.5, 10, 12, 15, 17.5];
+                $scope.SIPCalculatorData.return = returns[$scope.SIPCalculatorData.risk - 1];
+                $scope.hideSIPCalculator();
+            };
+            $scope.reSIPCalculatorData = function() {
+                $scope.SIPCalculatorData.showCalc = true;
+                var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sup", "Oct", "Nov", "Dec"];
+                var savings = 0,
+                    sip = $scope.SIPCalculatorData.amount,
+                    mil = 0,
+                    crore = 0,
+                    now = new Date(),
+                    year = now.getFullYear();
+                now.setDate(1);
+                // reset
+                $scope.SIPCalculatorData.calcTable = [{
+                    gist: {},
+                    cal: []
+                }];
+                // 
+                while (true) {
+                    now.setMonth(now.getMonth() + 1);
+                    if (year != now.getFullYear()) {
+                        sip += sip * $scope.SIPCalculatorData.appraisal / 100;
+                        year = now.getFullYear();
+                        $scope.SIPCalculatorData.calcTable.push({
+                            gist: {},
+                            cal: []
+                        });
+                    }
+                    var ret = sip * ($scope.SIPCalculatorData.return / 12) / 100;
+                    var sret = savings * ($scope.SIPCalculatorData.return / 12) / 100;
+                    savings = savings + sip + ret + sret;
+                    // 
+                    var gist = {
+                        month: monthName[now.getMonth()],
+                        year: now.getFullYear(),
+                        sip: sip,
+                        total: savings,
+                        return: ret,
+                    };
+                    $scope.SIPCalculatorData.calcTable[$scope.SIPCalculatorData.calcTable.length - 1].gist = gist;
+                    $scope.SIPCalculatorData.calcTable[$scope.SIPCalculatorData.calcTable.length - 1].cal.push(gist);
+                    // 
+                    if (mil == 0 && savings > 1000000) {
+                        mil = new Date(now);
+                    } else if (crore == 0 && savings > 10000000) {
+                        crore = new Date(now);
+                        break;
+                    }
+                }
+                // 
+                now = new Date();
+                // $scope.SIPCalculatorData.millionByYear = mil.getFullYear();
+                $scope.SIPCalculatorData.millionByAge = $scope.SIPCalculatorData.age + (mil.getFullYear() - now.getFullYear());
+                $scope.SIPCalculatorData.millionByYear = mil.getFullYear() - now.getFullYear();
+                // $scope.SIPCalculatorData.crorepatiByYear = crore.getFullYear();
+                $scope.SIPCalculatorData.crorepatiByAge = $scope.SIPCalculatorData.age + (crore.getFullYear() - now.getFullYear());
+                $scope.SIPCalculatorData.crorepatiByYear = crore.getFullYear() - now.getFullYear();
+            };
+            // 
+            $scope.reSIPCalculatorData();
+        }
+    ]);
+    </script>
+    <!-- --------------------------------------------------------------- -->
+    <!-- HTML -->
+    <!-- --------------------------------------------------------------- -->
+    <div ng-app="PaisaSavvy" ng-controller="SIPCalculator">
+        <div class="navbar">
+            <div class="logo"></div>
+            <ul class="menu-items">
+                <li ng-click="gotoPath('https://www.paisasavvy.com/#!/login')">Sign Up</li>
+            </ul>
+        </div>
+        <!-- //Nav -->
+        <div style="height: 55px;"></div>
+        <!--  -->
+        <h1 style="width: 100%; line-height: 55px; margin: 21px 0 0; font-size: 34px; text-align: center; color: #212121;">{{SIPCalculatorData.title || "SIP Calculator"}}</h1>
+        <h3 style="max-width: 730px; margin: 0px auto 21px; text-align: center;"> {{SIPCalculatorData.desc || "Find out, how much monthly savings can make you a Millionaire or Crorepati. Use our calculator and play with different values to see how long you need to keep saving until you become Crorepati."}} </h3>
+        <!--  -->
+        <div style="margin: 0 auto; text-align: center;">
+            <div class="card-s noselect">
+                <div class="slider-label-box" style="">
+                    <span class="slider-label-sub">Your Age</span>
+                    <span class="slider-label-big">
+                {{SIPCalculatorData.age}} 
+            <span class="slider-label-small">Years</span>
+                    </span>
+                </div>
+                <md-slider class="slider" step="1" min="20" max="59" ng-model="SIPCalculatorData.age" ng-change="hideSIPCalculator()" style="width: 100%; margin: -5px auto 0px;"></md-slider>
+                <!--  -->
+                <div class="slider-label-box" style="">
+                    <span class="slider-label-sub" style="width: 55%;">Monthly Investment Amount</span>
+                    <span class="slider-label-big">
+            <span class="slider-label-small">Rs.</span> {{SIPCalculatorData.amount | IndianCurrency : 'true'}}
+                    </span>
+                </div>
+                <md-slider class="slider" step="1000" min="2000" max="65000" ng-model="SIPCalculatorData.amount" ng-change="hideSIPCalculator()" style="width: 100%; margin: -5px auto 0px;"></md-slider>
+                <!--  -->
+                <div class="slider-label-box" style="">
+                    <span class="slider-label-sub">Expected Yearly Salary Appraisal</span>
+                    <span class="slider-label-big">
+            {{SIPCalculatorData.appraisal}} 
+            <span class="slider-label-small">%</span>
+                    </span>
+                </div>
+                <md-slider class="slider" step="1" min="4" max="34" ng-model="SIPCalculatorData.appraisal" ng-change="hideSIPCalculator()" style="width: 100%; margin: -5px auto 0px;"></md-slider>
+                <!--  -->
+                <div class="slider-label-box" style="">
+                    <span class="slider-label-sub">Risk Preference</span>
+                    <span class="slider-label-big">
+                {{SIPCalculatorData.riskLevel[SIPCalculatorData.risk - 1]}}
+                <span class="slider-label-small">{{SIPCalculatorData.return}}%<sup>●</sup></span>
+                    </span>
+                </div>
+                <md-slider class="slider" step="1" min="1" max="5" ng-model="SIPCalculatorData.risk" ng-change="SIPCalculatorSetReturn()" style="width: 100%; margin: -5px auto 0px;"></md-slider>
+                <!--  -->
+                <p style="margin: 21px auto 0; width: 100%; padding: 0; font-size: 12px;"><sup>●</sup> Estimated return for selected risk level, based on past data.</p>
+            </div>
+            <!--  -->
+            <div class="card-s noselect" style="background: #E91E63;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 55px; line-height: 55px; width: 200px; margin: auto; font-size: 20px; background: #FFF; border-radius: 3px; color: #343434; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16); cursor: pointer; outline: none;" ng-hide="SIPCalculatorData.showCalc" ng-click="reSIPCalculatorData()">Calculate</div>
+                <div style="height: 48%; padding: 20px 0px; color: #FFFFFF; font-size: 28px; font-weight: 400; box-sizing: border-box;" ng-show="SIPCalculatorData.showCalc">
+                    You'll be a Millionaire
+                    <br/>by age {{SIPCalculatorData.millionByAge}}
+                    <br/>i.e. in {{SIPCalculatorData.millionByYear}} years
+                </div>
+                <div style="height: 48%; padding: 20px 0px; color: #FFFFFF; font-size: 28px; font-weight: 400; box-sizing: border-box;" ng-show="SIPCalculatorData.showCalc">
+                    You'll be a Crorepati
+                    <br/>by age {{SIPCalculatorData.crorepatiByAge}}
+                    <br/>i.e. in {{SIPCalculatorData.crorepatiByYear}} years
+                </div>
+            </div>
+        </div>
+        <!--  -->
+        <br />
+        <p style="">
+            If you're {{SIPCalculatorData.age}} and you save Rs. {{SIPCalculatorData.amount | IndianCurrency : 'true'}} every month and invest it in Mutual Funds, and keep increasing it by {{SIPCalculatorData.appraisal}}% every year, you’ll have a Crore rupees in next {{SIPCalculatorData.crorepatiByYear}} years. Please note, the actual returns will not be as linear and exact, with market movements your corpus will see major ups and downs. But, given the long-term nature of the investment, you should get average positive returns.
+        </p>
+        <!--  -->
+        <div class="promo-banner" ng-click="gotoPath('https://www.paisasavvy.com/#!/login')"></div>
+        <!--  -->
+        <div style="font-size: 18px; text-align: center; line-height: 55px;">Detailed Calculations</div>
+        <!--  -->
+        <div class="returntbl" ng-show="SIPCalculatorData.showCalc" style="height: 55px;">
+            <div class="calc-tbl-header noselect">
+                Year
+            </div>
+            <div class="calc-tbl-header noselect">
+                Monthly Amount (₹)
+            </div>
+            <div class="calc-tbl-header noselect">
+                Total Savings (₹)
+            </div>
+        </div>
+        <!--  -->
+        <div class="returntbl noselect" ng-class="{'mil': i == SIPCalculatorData.millionByYear, 'crore': i == SIPCalculatorData.crorepatiByYear}" ng-repeat="(i, tr) in SIPCalculatorData.calcTable track by $index">
+            <div class="calc-tbl-header noselect">
+                {{tr.gist.year}}
+            </div>
+            <div class="calc-tbl-header noselect">
+                {{tr.gist.sip | IndianCurrency}}
+            </div>
+            <div class="calc-tbl-header noselect">
+                {{tr.gist.total | IndianCurrency}}
+            </div>
+            <!--  -->
+            <table cellspacing="0">
+                <tr>
+                    <td class="noselect">Date</td>
+                    <td class="noselect">SIP</td>
+                    <td class="noselect">Return</td>
+                    <td class="noselect">Total</td>
+                </tr>
+                <tr ng-repeat="d in tr.cal track by $index">
+                    <td class="noselect">{{d.month}} {{d.year}}</td>
+                    <td class="noselect">{{d.sip | IndianCurrency}}</td>
+                    <td class="noselect">{{d.return | IndianCurrency}}</td>
+                    <td class="noselect">{{d.total | IndianCurrency}}</td>
+                </tr>
+            </table>
+        </div>
+        <div ng-include src="'/pages/footer.html'"></div>
+    </div>
+    <!-- -------------------------------------------------------------- -->
+    <!-- STYLE -->
+    <!-- -------------------------------------------------------------- -->
+    <style type="text/css">
+    @import url("/styles/common.css");
+    html {
+        height: 100%;
+        width: 100%;
+        background: #F5F6FA;
+    }
+
+    body {
+        margin: 0px auto;
+        padding: 0px;
+        height: 100%;
+        width: 100%;
+        font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        font-variant-ligatures: no-common-ligatures;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -moz-font-feature-settings: "lnum" 1, "salt" 0;
+        -webkit-font-feature-settings: "lnum" 1, "salt" 0;
+        letter-spacing: .8px;
+        background: inherit;
+    }
+
+    body>.ng-scope {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: #2196F3;
+        cursor: pointer;
+    }
+
+    a.disabled {
+        opacity: .34;
+        pointer-events: none;
+    }
+
+    .navbar {
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+        height: 55px;
+        /*border-bottom: 1px solid rgba(0,0,0,.1);*/
+        background-color: rgba(255, 255, 255, 1);
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .navbar>.logo {
+        display: inline-block;
+        margin-left: 60px;
+        height: 60px;
+        width: 100px;
+        background-image: url(https://www.paisasavvy.com/assets/logo-100px-E91E63.png);
+        background-repeat: no-repeat;
+        background-position: left center;
+        vertical-align: middle;
+        opacity: .7;
+    }
+
+    .navbar .menu-items {
+        position: absolute;
+        display: block;
+        top: 60px;
+        right: 13px;
+        min-width: 300px;
+        width: 50%;
+        height: 55px;
+        line-height: 55px;
+        margin: -60px auto 0;
+        padding: 0;
+        list-style-type: none;
+        vertical-align: middle;
+    }
+
+    .navbar .menu-items li {
+        float: right;
+        margin: 0px 10px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: .34px;
+        color: #2196F3;
+        color: #1976D2;
+        color: #212121;
+        color: #E91E63;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .navbar .menu-items li:hover {
+        color: #212121;
+    }
+    /* ------------ */
+
+    p {
+        display: block;
+        width: 95%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0px 21px;
+        line-height: 22px;
+        font-size: 14px;
+        font-weight: 500;
+        color: inherit;
+        color: #607D8B;
+        text-align: justify;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        width: 100%;
+        line-height: 55px;
+        margin: 21px 0 0;
+        font-size: 34px;
+        font-weight: 300;
+        text-align: center;
+        color: #212121;
+    }
+
+    h3 {
+        display: block;
+        width: 95%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0px 21px;
+        line-height: 22px;
+        font-size: 16px;
+        font-weight: 500;
+        color: inherit;
+        color: #607D8B;
+        text-align: justify;
+        box-sizing: border-box;
+    }
+    /*-----  ------*/
+
+    .card-s {
+        position: relative;
+        display: inline-block;
+        max-width: 480px;
+        width: 95%;
+        height: 430px;
+        padding: 21px 34px;
+        margin: 8px 5px;
+        background: #FFF;
+        box-sizing: border-box;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        vertical-align: top;
+    }
+
+    .card-s>.slider-label-box {
+        position: relative;
+        height: 38px;
+    }
+
+    .card-s>.switches {
+        display: inline-block;
+        width: 89px;
+        line-height: 34px;
+        margin: 8px 2px;
+        border-radius: 3px;
+        font-weight: 500;
+        color: #FFF;
+        border: 2px solid #009688;
+        color: #009688;
+        cursor: pointer;
+    }
+
+    .card-s>.slider-label-box>.switches.selected {
+        color: #FFF;
+        background: #009688;
+        border: 0px solid #009688;
+    }
+
+    .card-s>.slider-label-box>.slider-label-sub {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 46%;
+        line-height: 18px;
+        font-size: 14px;
+        color: #607D8B;
+        text-align: left;
+    }
+
+    .card-s>.slider-label-box>.slider-label-big {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 52%;
+        line-height: 22px;
+        font-size: 26px;
+        color: #263238;
+        text-align: right;
+    }
+
+    .card-s>.slider-label-box .slider-label-small {
+        font-size: 14px;
+        font-weight: bold;
+        color: #607D8B;
+        vertical-align: baseline;
+    }
+
+    table {
+        margin: 0 auto;
+    }
+
+    table td {
+        width: 144px;
+        padding: 8px 5px 8px 0px;
+        font-size: 14px;
+        color: #607D8B;
+        text-align: right;
+        border: 1px solid #DCDCDC;
+    }
+
+    @media only screen and (max-width: 800px) {
+        .navbar {
+            position: absolute;
+        }
+        .promo-banner {
+            margin: 55px auto;
+            width: 95vw;
+            background: url(https://www.paisasavvy.com/assets/promo-banner-1-v.jpg);
+            height: 100vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            cursor: pointer;
+            outline: none;
+        }
+    }
+
+    @media only screen and (min-width: 800px) {
+        .navbar {
+            position: fixed;
+        }
+        .promo-banner {
+            margin: 55px auto;
+            width: 100vw;
+            background: url(https://www.paisasavvy.com/assets/promo-banner-1.jpg);
+            height: 26vw;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            cursor: pointer;
+            outline: none;
+        }
+    }
+
+    .returntbl {
+        width: 95%;
+        max-width: 1000px;
+        height: 34px;
+        padding: 8px 8px 34px;
+        margin: 5px auto;
+        border-radius: 5px;
+        text-align: center;
+        background: #FFFFFF;
+        border: 1px solid #CFD8DC;
+        box-sizing: border-box;
+        overflow: hidden;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .returntbl>.calc-tbl-header {
+        display: inline-block;
+        width: 30%;
+        line-height: 18px;
+        margin: 0px auto 21px;
+        font-size: 14px;
+        color: #343434;
+        vertical-align: top;
+        box-sizing: border-box;
+    }
+
+    .returntbl.open {
+        height: auto;
+    }
+
+    .returntbl.mil {
+        background: #80DEEA;
+    }
+
+    .returntbl.crore {
+        background: #EF9A9A;
+    }
+
+    .returntbl:hover {
+        height: auto;
+    }
+    /*-----  ------*/
+
+    .hr {
+        width: 100%;
+        height: 1px;
+        max-width: 1100px;
+        margin: 0px auto;
+        background-color: #CFD8DC;
+    }
+
+    div.hr {
+        width: 80%;
+        height: 1px;
+        max-width: 1100px;
+        margin: 21px auto;
+        background-color: #CFD8DC;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .login-popup-cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, .89);
+        z-index: 12;
+    }
+
+    .login-popup-cover>.paisasavvy-vid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 70vw;
+        height: 39.4vw;
+        margin: auto;
+        border: none;
+        background: #FFF;
+        border-radius: 5px;
+    }
+
+    .login-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 89%;
+        max-width: 500px;
+        height: 340px;
+        margin: auto;
+        padding: 0px;
+        border: 3px solid #000;
+        text-align: center;
+        background: #FFFFFF;
+        z-index: 13;
+        overflow: hidden;
+    }
+
+    .login-popup-cover .close-btn {
+        position: absolute;
+        top: -3px;
+        right: -3px;
+        width: 44px;
+        line-height: 44px;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        background-color: #000000;
+        z-index: 1;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .login-popup>h2 {
+        width: 89%;
+        line-height: 52px;
+        color: #000000;
+        font-size: 21px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .login-popup>input {
+        width: 300px;
+        line-height: 55px;
+        border: 2px solid #000000;
+        height: 55px;
+        letter-spacing: 1.3px;
+        box-sizing: border-box;
+    }
+
+    .login-popup>button {
+        width: 300px;
+        margin-top: 34px;
+        font-size: 15px;
+        font-weight: 600;
+        background: #000;
+        letter-spacing: 2.1px;
+        text-transform: uppercase;
+        box-shadow: none;
+    }
+
+    .login-popup>.main-cta-btn {
+        background: #000;
+    }
+    /* Overrides */
+
+    .slider .md-track.md-track-fill {
+        background-color: #E91E63;
+    }
+
+    .slider .md-thumb {
+        top: 7px;
+        width: 36px;
+        height: 34px;
+        border-radius: 40px;
+    }
+
+    .slider .md-thumb:after {
+        width: 34px;
+        height: 34px;
+        left: 0px;
+        border-radius: 40px;
+        border-color: #E91E63;
+        background-color: #E91E63;
+    }
+
+    .slider .md-track {
+        background-color: #DDDDDD;
+    }
+
+    .slider .md-focus-ring {
+        background-color: rgba(0, 192, 142, 0.34);
+    }
+
+    md-select .md-select-value {
+        height: 30px;
+        line-height: 30px;
+        border-bottom-width: 0px;
+        box-sizing: border-box;
+    }
+
+    md-select.md-default-theme:not([disabled]):focus .md-select-value,
+    md-select:not([disabled]):focus .md-select-value {
+        color: inherit;
+        border-bottom-color: transparent;
+    }
+
+    md-slider.md-default-theme.md-min .md-thumb:after,
+    md-slider.md-min .md-thumb:after {
+        background-color: #E91E63;
+        border-color: #E91E63;
+    }
+
+    .slider .md-focus-ring {
+        background-color: rgba(233, 30, 99, .34);
+    }
+    /* ------  -------*/
+    </style>
+</body>
+<!--  -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300&text=1234567890%,." rel="stylesheet">
+
+</html>

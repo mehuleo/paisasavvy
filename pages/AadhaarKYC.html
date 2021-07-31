@@ -1,0 +1,240 @@
+<div class="navbar">
+    <div class="logo"></div>
+    <ul class="menu-items">
+        <!-- <li></li> -->
+        <!-- <a href="">
+            <li>Log Out</li>
+        </a> -->
+    </ul>
+</div>
+<!-- //Nav -->
+<div style="height: 89px;"></div>
+<!-- Step tracker -->
+<div class="step-tracker">
+    <span class="step-back">
+        &nbsp;
+        <!-- <span class="back-icon">&#9668;</span> Back -->
+    </span>
+    <span class="step-count">2/5</span>
+    <span class="progress-container"></span>
+    <span class="progress-bar" style="width:{{stepProgress}}%;"></span>
+    <span class="current-step" style="left:{{stepProgress}}%">Aadhaar KYC</span>
+</div>
+<!-- // Step tracker -->
+<br><br>
+<div class="card center">
+    <h2>
+        Your KYC information doesn't exist.
+        <br> Let's get it done within few seconds.
+    </h2>
+    <p style="margin: 21px auto 34px;">
+        E-KYC is a completetly online and paperless process which will only take a few minutes. 
+        We will send you a OTP to validate your Aadhaar Number on your <b>Aadhaar linked phone</b>.
+        Please note, if you don't have your phone linked with Aadhaar already, you will not be able to complete this process.
+    </p>
+    <!-- name -->
+    <div class="container">
+        <div class="label">Investor Name
+            <span class="error">{{formData.Error.name}}</span>
+        </div>
+        <input type="text" class="text-box" id="name" name="name" placeholder="" ng-model="formData.name" />
+    </div>
+    <!-- Mobile -->
+    <div class="container">
+        <div class="label">Mobile
+            <span class="error">{{formData.Error.mobile}}</span>
+        </div>
+        <input type="text" class="text-box" id="mobile" name="mobile" placeholder="" ng-model="formData.mobile" disabled="disabled" />
+    </div>
+    <!-- aadhaar -->
+    <div class="container">
+        <div class="label">Aadhaar Number
+            <span class="error">{{formData.Error.aadhaar}}</span>
+        </div>
+        <input type="text" class="text-box" id="aadhaar" name="aadhaar" placeholder="" ng-model="formData.aadhaar" />
+    </div>
+    <!-- PAN -->
+    <div class="container">
+        <div class="label">PAN
+            <span class="error">{{formData.Error.pan}}</span>
+        </div>
+        <input type="text" class="text-box" id="pan" name="pan" placeholder="" ng-model="formData.pan" />
+    </div>
+    <!-- Email -->
+    <div class="container">
+        <div class="label">Email ID
+            <span class="error">{{formData.Error.email}}</span>
+        </div>
+        <input type="text" class="text-box" id="email" name="email" placeholder="" ng-model="formData.email" />
+    </div>
+    <!-- dummy -->
+    <div class="container">
+        <!--  -->
+    </div>
+    <br>
+    <div class="label" style="margin-top: 34px; text-align: center;">
+        <span class="error">{{formData.Error.common}}</span>
+    </div>
+    <br>
+    <button type="button" class="main-cta-btn pink" ng-click="validate()" style="margin-top: 34px;">
+    Generate Aadhaar OTP
+    </button>
+</div>
+
+<div style="height: 89px;"></div>
+<!--  -->
+<style type="text/css">
+@import url("styles/card.css");
+html {
+    height: 100%;
+    width: 100%;
+    background-color: #F5F6FA;
+}
+
+body {
+    margin: 0px auto;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
+    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-ligatures: no-common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "lnum" 1, "salt" 0;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 0;
+    letter-spacing: .8px;
+    background-color: transparent;
+}
+
+body>.ng-scope {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: none;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+a.disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+
+.navbar {
+    position: relative;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    background-color: rgba(255,255,255,.92);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.navbar > .logo {
+    display: inline-block;
+    margin-left: 60px;
+    height: 60px;
+    width: 100px;
+    background-image: url(assets/logo-100px-E91E63.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    vertical-align: middle;
+    opacity: .7;
+}
+
+.navbar .menu-items {
+    position: absolute;
+    display: block;
+    top: 60px;
+    right: 0px;
+    width: 400px;
+    height: 55px;
+    line-height: 55px;
+    margin: -60px auto 0;
+    padding: 0;
+    list-style-type: none;
+    vertical-align: middle;
+}
+
+.navbar .menu-items li {
+    float: left;
+    margin: 0px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .34px;
+    color: #2196F3;
+    color: #1976D2;
+    color: #212121;
+    color: #E91E63;
+    cursor: pointer;
+}
+
+.navbar .menu-items li:hover {
+    color: #212121;
+}
+/* ------  -------- */
+
+.container {
+    display: inline-block;
+    width: 48%;
+    max-width: 400px;
+    vertical-align: middle;
+}
+.text-box {
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    width: 80%;
+    max-width: 500px;
+    margin: 0px auto 0;
+    padding: 0px 21px;
+    color: #263238;
+    font-size: 14px;
+    border: 1px solid #CFD8DC;
+    border-radius: 3px;
+    background: transparent;
+    outline: none;
+    box-sizing: border-box;
+    background: #F6F7F9;
+}
+.text-box.disabled {
+    color: #9E9E9E;
+}
+.label {
+    width: 80%;
+    max-width: 500px;
+    line-height: 16px;
+    margin: 13px auto 0px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #607D8B;
+    text-align: left;
+}
+.label.info {
+    margin: 8px auto 0px;
+    color: #B0BEC5;
+    letter-spacing: 0px;
+}
+.label.info span {
+    color: #607D8B;
+}
+.label > .error {
+    color: #E57373;
+}
+
+</style>

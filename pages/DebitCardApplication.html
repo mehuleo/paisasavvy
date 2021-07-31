@@ -1,0 +1,296 @@
+<div class="navbar">
+    <div class="logo"></div>
+    <ul class="menu-items">
+        <!-- <li>Welcome{{" " + user.name}}!</li> -->
+        <li ng-click="doLogout()">Log Out</li>
+    </ul>
+</div>
+<!-- //Nav -->
+<div style="height: 89px;"></div>
+<div style="position: relative;width: 89%;max-width: 900px;margin: 34px auto;text-align: center;background: #FFF;padding: 34px 0 34px;box-sizing: border-box;">
+    <h2>Debit Card Application.</h2>
+    <p class="center" style="margin-bottom: 21px;">
+        We will need following additional information for Debit Card.
+        <br>Usually your debit card will be shipped within 4 days.
+        <br>You can track your debit card status on Dashboard after applying.
+    </p>
+    <div style="height: 21px;"></div>
+    <!--  -->
+    <div class="container">
+        <div class="label">Name On Debit Card
+            <span class="error">{{formData.Error.nameOnCard}}</span>
+        </div>
+        <input type="text" class="text-box" name="nameOnCard" placeholder="" ng-model="formData.nameOnCard" />
+    </div>
+    <!--  -->
+    <div class="container">
+        <div class="label">Mother's Name
+            <span class="error">{{formData.Error.mothersName}}</span>
+        </div>
+        <input type="text" class="text-box" name="mothersName" placeholder="" ng-model="formData.mothersName" />
+    </div>
+    <!--  -->
+    <p class="label" style="margin-top: 34px; text-align: center;">
+        <span class="error">{{formData.Error.agree}}</span>
+    </p>
+    <md-checkbox ng-model="formData.agree">
+        You'll receive your Debit Card at following address:
+    </md-checkbox>
+    <p class="center">
+        {{debitCardData.addressL1}}, 
+        {{debitCardData.addressL2}}, 
+        {{debitCardData.addressL3}}
+        <br>
+        {{debitCardData.city}} - {{debitCardData.pincode}}, {{debitCardData.state}}
+        <br>Contact No.: {{debitCardData.mobile}}
+    </p>
+
+    <!-- ERROR -->
+    <div class="label" style="margin: 34px auto 21px; text-align: center;">
+        <span class="error">{{formData.Error.common}}</span>
+    </div>
+    <br>
+    <!--  -->
+    <button class="main-cta-btn gray" ng-click="changeAddress()" ng-hide="loading" style="margin-right: 34px;">
+        I want to change my address
+    </button>
+    <!--  -->
+    <button class="main-cta-btn pink" ng-click="validate()" ng-hide="loading"> Apply for debit card </button>
+    
+    <div class="main-cta-btn pink"  ng-show="loading">
+        <div class="loading">
+            <span class="a"></span><span class="b"></span><span class="c"></span>
+        </div>
+    </div>
+
+</div>
+<div style="height: 89px;"></div>
+<!-- STYLE -->
+<style type="text/css">
+@import url("styles/card.css");
+
+html {
+    height: 100%;
+    width: 100%;
+    background-color: #F5F6FA;
+}
+
+body {
+    margin: 0px auto;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
+    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-ligatures: no-common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "lnum" 1, "salt" 0;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 0;
+    letter-spacing: .8px;
+    background-color: transparent;
+}
+
+body>.ng-scope {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: none;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+a.disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+
+.navbar {
+    position: relative;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    background-color: rgba(255,255,255,.92);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.navbar > .logo {
+    display: inline-block;
+    margin-left: 60px;
+    height: 60px;
+    width: 100px;
+    background-image: url(assets/logo-100px-E91E63.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    vertical-align: middle;
+    opacity: .7;
+}
+
+.navbar .menu-items {
+    position: absolute;
+    display: block;
+    top: 60px;
+    right: 0px;
+    width: 400px;
+    height: 55px;
+    line-height: 55px;
+    margin: -60px auto 0;
+    padding: 0;
+    list-style-type: none;
+    vertical-align: middle;
+}
+
+.navbar .menu-items li {
+    float: left;
+    margin: 0px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .34px;
+    color: #2196F3;
+    color: #1976D2;
+    color: #212121;
+    color: #E91E63;
+    cursor: pointer;
+}
+
+.navbar .menu-items li:hover {
+    color: #212121;
+}
+.hr {
+    width: 80%;
+    height: 1px;
+    max-width: 1100px;
+    margin: 0px auto;
+    background-color: #CFD8DC;
+}
+/* ----- -------- */
+.container {
+    display: inline-block;
+    width: 48%;
+    max-width: 400px;
+    vertical-align: middle;
+}
+.text-box {
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    width: 80%;
+    max-width: 500px;
+    margin: 0px auto 0;
+    padding: 0px 21px;
+    color: #263238;
+    font-size: 14px;
+    border: 1px solid #CFD8DC;
+    border-radius: 3px;
+    background: transparent;
+    outline: none;
+    box-sizing: border-box;
+    background: #F6F7F9;
+}
+.text-box.disabled {
+    color: #9E9E9E;
+}
+.label {
+    width: 80%;
+    max-width: 500px;
+    line-height: 16px;
+    margin: 13px auto 0px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #607D8B;
+    text-align: left;
+}
+.label.info {
+    margin: 8px auto 0px;
+    color: #B0BEC5;
+    letter-spacing: 0px;
+}
+.label.info span {
+    color: #607D8B;
+}
+.label > .error {
+    color: #F44336;
+    font-weight: 500;
+}
+
+
+/*  Overrides   */
+md-select {
+    height: 44px;
+    line-height: 44px;
+    width: 80%;
+    max-width: 500px;
+    margin: 0px auto 0;
+    padding: 0px 21px;
+    color: #263238;
+    font-size: 14px;
+    text-align: left;
+    border: 1px solid #CFD8DC;
+    border-radius: 3px;
+    background: transparent;
+    outline: none;
+    box-sizing: border-box;
+    background: #F7F8F9;
+}
+md-select .md-select-value {
+    height: 44px;
+    line-height: 44px;
+    padding: 0;
+    border-bottom-width: 0px;
+    box-sizing: border-box;
+}
+md-select.md-default-theme:not([disabled]):focus .md-select-value, 
+md-select:not([disabled]):focus .md-select-value {
+    color: inherit;
+    border-bottom-color: transparent;
+}
+
+md-checkbox {
+    display: block;
+    width: 100vw;
+    max-width: 430px;
+    margin: 5px 0 5px;
+    font-size: 12px;
+    color: #607D8B;
+    text-align: left;
+}
+md-checkbox .md-label {
+    line-height: 16px;
+    color: #607D8B;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+}
+md-checkbox .md-container {
+    top: 0; 
+    -webkit-transform: translateY(0); 
+    transform: translateY(0); 
+}
+md-checkbox.md-default-theme.md-checked .md-icon, 
+md-checkbox.md-checked .md-icon {
+    background-color: #26A69A;
+}
+md-checkbox.md-default-theme.md-checked .md-ink-ripple,
+md-checkbox.md-checked .md-ink-ripple {
+    color: #26A69A;
+}
+md-checkbox:last-of-type {
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>

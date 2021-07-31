@@ -1,0 +1,73 @@
+.step-tracker {
+    width: 800px;
+    height: 50px;
+    margin: 0 auto;
+    line-height: 50px;
+    position: relative;
+}
+
+.step-tracker .step-back {
+    line-height: 38px;
+    color: #607D8B;
+    vertical-align: middle;
+    cursor: pointer;
+    outline: none;
+}
+
+.step-tracker .step-back .back-icon {
+    font-size: 16px;
+    margin-right: 3px;
+}
+
+.step-tracker .step-count {
+    position: absolute;
+    right: 8px;
+    top: 0px;
+    line-height: 50px;
+    color: #ABABAB;
+}
+
+.step-tracker .progress-container,
+.step-tracker .progress-bar {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0px;
+    bottom: 0px;
+    background: #DCDCDC;
+}
+
+.step-tracker .progress-bar {
+    width: 0%;
+    background: #607D8B;
+    transition: width 2.1s;
+}
+
+.step-tracker .current-step {
+    position: absolute;
+    left: 20%;
+    width: 210px;
+    height: 30px;
+    top: 0px;
+    border-radius: 22px;
+    border: 1px solid #607D8B;
+    text-align: center;
+    line-height: 30px;
+    /* background: #fff; */
+    margin-left: -105px;
+    color: #455A64;
+    letter-spacing: .8px;
+    transition: left 2.1s;
+}
+
+.step-tracker .current-step:after {
+    position: absolute;
+    top: 30px;
+    border-style: solid;
+    border-color: #607D8B transparent transparent transparent;
+    border-width: 8px 8px 0px 8px;
+    content: "";
+    left: 97px;
+}
+
+.step-tracker .current-step {}

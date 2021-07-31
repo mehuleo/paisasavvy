@@ -1,0 +1,274 @@
+<div class="navbar">
+    <span class="logo-medium"></span>
+    <div class="progress" style="width: {{stepProgress}}%;"></div>
+</div>
+
+<!-- --------------- CARD 1 ------------------------- -->
+<div class="card m1 c1">
+    <center>
+        <div class="cell inline t">
+            <div class="amount">
+                <span class="cs">Rs.</span> {{data.investment|IndianCurrency}}
+            </div>
+            <div class="t1">
+                INVESTMENT
+            </div>
+            <div class="t2">
+                Under 80C
+            </div>
+        </div>
+        <div class="cell inline t">
+            <div class="amount">
+                <span class="plus">+</span>
+            </div>
+        </div>
+        <div class="cell inline t">
+            <div class="amount gray">
+                <span class="cs">Rs.</span> {{(data.taxSaving)|IndianCurrency}}
+            </div>
+            <div class="t1">
+                Save TAX
+            </div>
+            <div class="t2">
+                upto {{data.taxB}}%
+            </div>
+        </div>
+        <div class="cell inline t">
+            <div class="amount">
+                <span class="plus">+</span>
+            </div>
+        </div>
+        <div class="cell inline t">
+            <div class="amount gray">
+                <span class="cs">Rs.</span> {{(data.netReturnValue - data.investment)|IndianCurrency}}
+            </div>
+            <div class="t1">
+                RETURN
+            </div>
+            <div class="t2">
+                {{data.returnRate}}%/Year (Expected)
+            </div>
+        </div>
+        <div class="cell inline t">
+            <div class="amount">
+                <span class="plus">=</span>
+            </div>
+        </div>
+        <div class="cell inline t">
+            <div class="amount" style="color: #00AB66">
+                <span class="cs">Rs.</span>
+                <span>{{(data.netReturnValue + data.taxSaving)|IndianCurrency}}</span>
+            </div>
+            <div class="t1">
+                NET GAIN
+            </div>
+            <div class="t2">
+                after 3 years
+            </div>
+        </div>
+    </center>
+</div>
+<br><br>
+<!-- --------------- CARD 2  ------------------------- -->
+<div class="card center-align">
+    <div class="inline b cell3" style="text-align: right;">
+        <svg width="102px" height="102px" viewBox="0 0 102 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Desktop" transform="translate(-421, -386)">
+                    <g id="Return" transform="translate(250, 237)">
+                        <g id="return-meter" transform="translate(162.250000, 142)">
+                            <circle id="Oval" stroke="#DCDCDC" stroke-width="8" cx="60.125" cy="57.625" r="46.625"></circle>
+                            <path d="M38.1837409,100.71414 C14.6861676,87.8879506 3.80637497,55.553988 21.5760254,31.7597514 C44.2066811,0.879396805 85.9398262,11.2111882 99.3233322,34.8429139" id="Path-2" stroke="#FF4081" stroke-width="8" stroke-linecap="round" transform="translate(56.039593, 56.635078) rotate(-20) translate(-56.039593, -56.635078) "></path>
+                            <text id="11%" font-family="OpenSans, Open Sans" font-size="15" font-weight="normal" letter-spacing="0.8" fill="#607D8B">
+                                <tspan x="43" y="68">11%</tspan>
+                            </text>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+    <div class="inline b cell3">
+        <svg width="149px" height="149px" viewBox="0 0 149 149" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Desktop" transform="translate(-580, -334)">
+                    <g id="Return" transform="translate(250, 237)">
+                        <g id="return-meter" transform="translate(311.500000, 79)">
+                            <circle id="Oval" stroke="#DCDCDC" stroke-width="8" cx="92.75" cy="92.75" r="69.75"></circle>
+                            <path d="M58.7614451,155.286658 C5.99280007,128.396065 6.15216137,42.7467271 78.3236321,24.7616609 C159.824817,12.1853104 190.484115,116.239017 127.050651,152.963742" id="Path-2" stroke="#00BCD4" stroke-width="8" stroke-linecap="round" transform="translate(91.203187, 89.500192) rotate(-25) translate(-91.203187, -89.500192) "></path>
+                            <text font-family="OpenSans, Open Sans" font-size="20" font-weight="normal" letter-spacing="1.13" fill="#000000">
+                                <tspan x="73" y="105">17%</tspan>
+                            </text>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+    <div class="inline b cell3" style="text-align: left;">
+        <svg width="102px" height="102px" viewBox="0 0 102 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Desktop" transform="translate(-778, -386)">
+                    <g id="Return" transform="translate(250, 237)">
+                        <g id="return-meter" transform="translate(528.750000, 149)">
+                            <circle id="Oval" stroke="#7ED321" stroke-width="8" cx="50.625" cy="50.625" r="46.625"></circle>
+                            <text id="24%" font-family="OpenSans, Open Sans" font-size="15" font-weight="normal" letter-spacing="0.8" fill="#607D8B">
+                                <tspan x="34" y="61">24%</tspan>
+                            </text>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+    <div></div>
+    <br>
+    <center>
+        <div class="inline t cell3 c2" style="text-align: right;">
+            <div class="amount" style="color: #FF4081">
+                <span class="cs">Rs.</span>
+                <span>{{(data.netReturnValue + data.taxSaving)|IndianCurrency}}</span>
+            </div>
+            <div class="t1">
+                POOR
+            </div>
+            <div class="t2" style="margin-left: 28px;">
+                When the market goes through
+                a continuous series of distressing 
+                events, for example, global 
+                financial crisis of 2008
+            </div>
+        </div>
+        <div class="inline t cell3 c2" style="margin-bottom: 10px; text-align: center;">
+            <div class="amount" style="color: #00BCD4">
+                <span class="cs">Rs.</span>
+                <span>{{(data.netReturnValue + data.taxSaving)|IndianCurrency}}</span>
+            </div>
+            <div class="t1">
+                EXPECTED
+            </div>
+            <div class="t2" style="margin: 0px 21px;">
+                When the market goes through
+                a continuous series of distressing 
+                events, for example, global 
+                financial crisis of 2008
+            </div>
+        </div>
+        <div class="inline t cell3 c2" style="margin-bottom: 10px; text-align: left;">
+            <div class="amount" style="color: #7ED321">
+                <span class="cs">Rs.</span>
+                <span>{{(data.netReturnValue + data.taxSaving)|IndianCurrency}}</span>
+            </div>
+            <div class="t1">
+                GOOD
+            </div>
+            <div class="t2" style="margin-right: 21px;">
+                When the market goes through
+                a continuous series of distressing 
+                events, for example, global 
+                financial crisis of 2008
+            </div>
+        </div>
+    </center>
+
+</div>
+<!-- --------------- //CARD  ------------------------- -->
+<br>
+<br>
+<br>
+<p class="wider">
+    PaisaSavvy.com is a member of AMFI, AMFI Registration Number: ARN-127961
+    <br>
+    <br> PaisaSavvy.com is only an order and payment collection platform that collects orders and payment on behalf of clients and sends to AMCs for execution. The Client expressly agrees that PaisaSavvy.com or Anagalyph Advisory Services Pvt Ltd is not liable or responsible and does not represent or warrant for any damages regarding delay of order execution or non-execution of orders of the Client due to, but not being limited to, any link/system failure which may occur at the end of the client, PaisaSavvy.com platform
+    <br>
+    <br>
+    <br> Mutual Funds investments are subject to market risks, read all scheme related documents carefully. Past performance is not an indicator for future returns.
+</p>
+<br>
+<br>
+<style type="text/css">
+.c1 .cell {
+    min-height: 50px;
+}
+
+.c1 .amount {
+    font-size: 24px;
+    line-height: 30px;
+    color: #607D8B;
+    letter-spacing: .8px;
+}
+
+.c1 .amount.gray {
+    color: #A9A9A9;
+}
+
+.c1 .amount .cs {
+    font-size: 12px;
+    color: inherit;
+    margin-right: -3px;
+}
+
+.c1 .amount .plus {
+    font-size: 16px;
+    line-height: 30px;
+    margin: 0px 21px;
+    vertical-align: middle;
+    color: #BCBCBC;
+}
+
+
+/* ---- */
+
+.c1 .cell .t1 {
+    margin: 21px 0 0;
+    color: #BCBCBC;
+    color: #607D8B;
+    color: #90A4AE;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+}
+
+.c1 .cell .t2 {
+    margin: 0px 0 0;
+    color: #BCBCBC;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: .5px;
+}
+/* ----- */
+.cell3 {
+    width: 32%;
+}
+.c2.cell3 {
+    padding: 0px 8px;
+    box-sizing: border-box;
+}
+.c2.cell3 .amount {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .8px;
+}
+
+
+.c2 .t1 {
+    margin: 34px 0 10px 0px;
+    color: #BCBCBC;
+    color: #607D8B;
+    color: #90A4AE;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+}
+
+.c2 .t2 {
+    /*margin: 0px 10px 0 38px;*/
+    color: #BCBCBC;
+    font-size: 13px;
+    letter-spacing: .5px;
+    text-align: justify;
+}
+</style>

@@ -1,0 +1,374 @@
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+</head>
+<div class="navbar">
+    <div class="logo" ng-click="gotoPath('/')"></div>
+    <ul class="menu-items">
+        <!-- <a href="#" target="_blank">
+            <li>Download App</li>
+        </a> -->
+        <a href="//www.paisasavvy.com/pages/terms-and-conditions.html" target="_blank">
+            <li>Terms</li>
+        </a>
+        <li ng-click="gotoPath('faq')">FAQ</li>
+        <li ng-click="doSignIn()">Log In</li>
+        <li ng-click="doSignUp()">Sign Up</li>
+        <!-- <a href="mailto:hello@paisasavvy.com" target="_blank">
+            <li>Contact Us</li>
+        </a> -->
+        <!-- <li> <span class="green-highlight" ng-click="data.showLogin=true">Sign In</span></li> -->
+    </ul>
+</div>
+<!--  Login Pop up -->
+<div class="login-popup-cover">
+    <div class="login-popup" ng-hide="formData.showOTP">
+        <!-- <span class="close-btn" ng-click="closePopup()">X</span> -->
+        <h2>
+            Hello, Paisa Savvy Investor!
+        </h2>
+        <p style="margin: 8px auto 34px; text-align: center;">
+            Please enter your mobile number below (without +91).
+            <br>We'll send you a OTP, to validate your number.
+        </p>
+        <span class="texterror" ng-if="formData.error">{{formData.error}}</span>
+        <br>
+        <input type="text" class="text" ng-model="formData.mobile" placeholder="Mobile Number" maxlength="12" style="width: 300px; letter-spacing: 1.3px;" ng-keyup="filterNumbers('mobile')">
+        <br>
+        <button type="button" class="main-cta-btn" ng-click="sendOTP()" style="margin-top: 21px;" ng-hide="loading">
+            Generate OTP
+        </button>
+        <div class="main-cta-btn black" style="margin-top: 21px;" ng-show="loading">
+            <div class="loading">
+                <span class="a"></span><span class="b"></span><span class="c"></span>
+            </div>
+        </div>
+    </div>
+    <div class="login-popup" ng-show="formData.showOTP">
+        <!-- <span class="close-btn" ng-click="closePopup()">X</span> -->
+        <h2>
+            Great!
+        </h2>
+        <p style="margin: 21px auto 34px; text-align: center;">
+            We have sent you a OTP on your number +91 {{formData.mobile}}.
+        </p>
+        <span class="texterror" ng-if="formData.error">&nbsp; {{formData.error}}</span>
+        <br>
+        <input type="text" class="text" ng-model="formData.otp" placeholder="Enter OTP" maxlength="12" style="width: 300px; letter-spacing: 1.3px;" ng-keyup="filterNumbers('otp')">
+        <br>
+        <button type="button" class="main-cta-btn" ng-click="validateOTP()" style="margin-top: 21px;" ng-hide="loading">
+            Validate OTP
+        </button>
+        <div class="main-cta-btn black" style="margin-top: 21px;" ng-show="loading">
+            <div class="loading">
+                <span class="a"></span><span class="b"></span><span class="c"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+html {
+    height: 100%;
+    width: 100%;
+    background-color: #F5F6FA;
+    background-color: #FFFFFF;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    min-width: 750px;
+    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-ligatures: no-common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "lnum" 1, "salt" 0;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 0;
+    letter-spacing: .8px;
+    background-color: transparent;
+}
+
+body>.ng-scope {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+a.disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+
+.navbar {
+    position: relative;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    background-color: rgba(255, 255, 255, .92);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.navbar>.logo {
+    display: inline-block;
+    margin-left: 60px;
+    height: 60px;
+    width: 100px;
+    background-image: url(assets/logo-100px-E91E63.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    vertical-align: middle;
+    opacity: .7;
+    cursor: pointer;
+    outline: none;
+}
+
+.navbar>.textlogo {
+    position: absolute;
+    display: block;
+    top: 5px;
+    left: 5px;
+    width: 144px;
+    line-height: 44px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    background: #000000;
+    letter-spacing: 2.5px;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+.navbar .menu-items {
+    position: absolute;
+    display: block;
+    top: 60px;
+    right: 21px;
+    width: 560px;
+    height: 55px;
+    line-height: 55px;
+    margin: -60px auto 0;
+    padding: 0;
+    list-style-type: none;
+    vertical-align: middle;
+}
+
+.navbar .menu-items li {
+    float: right;
+    margin: 0px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .34px;
+    color: #2196F3;
+    color: #1976D2;
+    color: #212121;
+    color: #E91E63;
+    cursor: pointer;
+    outline: none;
+}
+
+.navbar .menu-items li:hover {
+    color: #212121;
+}
+
+@media only screen and (max-width: 800px) {
+    .login-popup {
+        border: none !important;
+    }
+    .navbar .menu-items {
+        display: none !important;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .login-popup {
+        border: 3px solid #000;
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.login-popup-cover {}
+
+.login-popup-cover>.paisasavvy-vid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 70vw;
+    height: 39.4vw;
+    margin: auto;
+    border: none;
+    background: #FFF;
+    border-radius: 5px;
+}
+
+.login-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 89%;
+    max-width: 500px;
+    height: 340px;
+    margin: auto;
+    padding: 0px;
+    border: 3px solid #000;
+    text-align: center;
+    background: #FFFFFF;
+    z-index: 13;
+    overflow: hidden;
+}
+
+.login-popup-cover .close-btn {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 44px;
+    line-height: 44px;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    background-color: #000000;
+    z-index: 1;
+    cursor: pointer;
+    outline: none;
+}
+
+.login-popup>h2 {
+    width: 89%;
+    line-height: 52px;
+    color: #000000;
+    font-size: 21px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.login-popup>input {
+    width: 300px;
+    line-height: 55px;
+    border: 2px solid #000000;
+    height: 55px;
+    letter-spacing: 1.3px;
+    box-sizing: border-box;
+}
+
+.login-popup>button {
+    width: 300px;
+    margin-top: 34px;
+    font-size: 15px;
+    font-weight: 600;
+    background: #000;
+    letter-spacing: 2.1px;
+    text-transform: uppercase;
+    box-shadow: none;
+}
+
+.login-popup>.main-cta-btn {
+    background: #000;
+}
+
+.text::placeholder {
+    color: #999999;
+    letter-spacing: 0.34px;
+    text-transform: capitalize;
+}
+
+.texterror {
+    display: block;
+    /*width: 500px;*/
+    margin: 13px auto;
+    font-weight: 500;
+    text-align: center;
+    color: #E53935;
+}
+
+.text {
+    display: inline-block;
+    margin: 0 auto;
+    width: 280px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    border-bottom: 2px solid #F06292;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #37474F;
+    text-transform: uppercase;
+    background: transparent;
+    letter-spacing: .55px;
+    outline: none;
+}
+
+div.main-cta-btn,
+button.main-cta-btn {
+    display: inline-block;
+    min-width: 280px;
+    height: 55px;
+    line-height: 55px;
+    margin: 0px auto;
+    padding: 0px 21px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    /*text-transform: uppercase;*/
+    text-align: center;
+    letter-spacing: .21px;
+    background-size: 45px 45px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 2px;
+    background: #2196F3;
+    text-decoration: none;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+button.main-cta-btn.text-shadow {
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.21);
+}
+
+div.main-cta-btn.pink,
+button.main-cta-btn.pink {
+    background-color: #E91E63;
+}
+
+div.main-cta-btn.gray,
+button.main-cta-btn.gray {
+    background-color: #607D8B;
+}
+
+button.main-cta-btn:hover {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+</style>

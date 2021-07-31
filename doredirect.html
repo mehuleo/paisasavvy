@@ -1,0 +1,11 @@
+Redirecting...
+<script type="text/javascript">
+function sendmsg() {
+	top.postMessage({
+		from: "doredirect.html",
+		url: location.href,
+	}, "*");
+}
+sendmsg();
+setTimeout(sendmsg, 8000);
+</script>

@@ -1,0 +1,144 @@
+<div class="navbar">
+	<span class="logo-medium"></span>
+    <div class="progress" style="width: {{stepProgress}}%;"></div>
+</div>
+<!-- //Nav -->
+<br><br><br>
+<!-- --------------- CARD 1 ------------------------- -->
+<div class="card">
+    <span class="invest-icon"></span>
+    <span class="big">
+        We've received investment instruction for &#8377; {{data.amount|currency:'':0}}
+    </span>
+    <p class="">
+        We will communicate via e-mail/SMS, once your investment instructions have been processed, 
+        which usually takes around 2 business days.
+    </p>
+    <br><br>
+    <div class="fundslist">
+        <span class="fundsname"><b>Scheme Name</b></span>
+        <span class="barchart" style="background-color: transparent;">
+            <b>&nbsp;&nbsp;&nbsp; % of total Investment</b>
+        </span>
+        <span class="fundsvalue"><b>Amount</b></span>
+        <span class="fundsrisk"><b>Risk Level</b></span>
+    </div>
+    <div class="fundslist">
+        <span class="fundsname"> Kotak Long Term </span>
+        <span class="barchart">
+            <span class="barchart-bar" style="width: 50%; background: #E6EE9C; ">
+                50%
+            </span>
+        </span>
+        <span class="fundsvalue">&#8377; {{(data.amount/2)|currency:'':0}}</span>
+        <span class="fundsrisk">Moderately High</span>
+    </div>
+    <div class="fundslist">
+        <span class="fundsname"> Reliance ELSS </span>
+        <span class="barchart">
+            <span class="barchart-bar" style="left: 50%; width: 25%; background: #E6EE9C; ">
+                25%
+            </span>
+        </span>
+        <span class="fundsvalue">&#8377; {{(data.amount/4)|currency:'':0}}</span>
+        <span class="fundsrisk">Moderately High</span>
+    </div>
+    <div class="fundslist">
+        <span class="fundsname"> HDFC Tax Saver Fund </span>
+        <span class="barchart">
+            <span class="barchart-bar" style="left: 75%; width: 25%; background: #E6EE9C; ">
+                25%
+            </span>
+        </span>
+        <span class="fundsvalue">&#8377; {{(data.amount/4)|currency:'':0}}</span>
+        <span class="fundsrisk">Moderate</span>
+    </div>
+    <br>
+    <!-- Total -->
+    <div class="fundslist">
+        <span class="fundsname"> <b>Total </b> </span>
+        <span class="barchart">
+            <span class="barchart-bar" style="width: 100%; background: #80DEEA; ">
+                100%
+            </span>
+        </span>
+        <span class="fundsvalue"><b>&#8377; {{data.amount|currency:'':0}}</b></span>
+        <span class="fundsrisk">
+            Moderate
+        </span>
+    </div>
+    <br><br>
+    <hr>
+    <br><br>
+</div>
+<!-- --------------- //CARD  ------------------------- -->
+<br><br><br>
+<p class="wider">
+    PaisaSavvy.com is a member of AMFI, AMFI Registration Number: ARN-127961
+    <br><br>
+    PaisaSavvy.com is only an order and payment collection platform that collects orders and payment on behalf of clients and sends to AMCs for execution. The Client expressly agrees that PaisaSavvy.com or Anagalyph Advisory Services Pvt Ltd is not liable or responsible and does not represent or warrant for any damages regarding delay of order execution or non-execution of orders of the Client due to, but not being limited to, any link/system failure which may occur at the end of the client, PaisaSavvy.com platform
+    <br><br><br>
+    Mutual Funds investments are subject to market risks, read all scheme related documents carefully. Past performance is not an indicator for future returns.
+</p>
+<br><br>
+<style type="text/css">
+/* Table */
+.fundslist {
+    text-align: center;
+    margin: 13px auto;
+}
+.fundsname {
+    display: inline-block;
+    width: 130px;
+    text-align: left;
+    vertical-align: middle;
+}
+.fundsvalue {
+    display: inline-block;
+    width: 89px;
+    text-align: right;
+    vertical-align: middle;
+}
+.fundsrisk {
+    display: inline-block;
+    width: 180px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+.fundsrisk.r1 {
+    background-image: url(/assets/riskometer-r3.png);
+}
+.barchart {
+    position: relative;
+    display: inline-block;
+    width: 210px;
+    height: 20px;
+    margin: 0px 55px;
+    text-align: left;
+    background: #f5f5f5;
+    vertical-align: middle;
+}
+.barchart > .barchart-bar {
+    position: absolute;
+    width: 0%;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    line-height: 20px;
+    padding: 0px 0px 0px 13px;
+    box-sizing: border-box;
+}
+/* Icon */
+.invest-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    background-image: url(assets/investing.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 100px;
+}
+</style>

@@ -1,0 +1,36 @@
+.navbar {
+	position: relative;
+	width: 100%;
+	height: 50px;
+    /*background-color: #25b08f;*/
+	/*background-color: rgba(249, 249, 249, 0.34);*/
+	/*border-bottom: 1px solid #00AB60;*/
+	/*background-color: #00AB60;*/
+}
+.navbar .logo-medium {
+	position: absolute;
+    width: 110px;
+    height: 50px;
+    line-height: 50px;
+    left: 55px;
+    top: 0px;
+     background-image: url(/assets/logo-110px.png); 
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    /*font-size: 22px;*/
+    /*letter-spacing: 1px;*/
+    /*font-family: 'GT Walsheim Pro Trial';*/
+    /*font-weight: 400;*/
+    /*color: #00ab60;*/
+}
+.progress {
+	position: absolute;
+	display: none;
+	width: 0%;
+	height: 3px;
+	left: 0px;
+	top: 0px;
+	background-color: #00AB60;
+    transition: all 2.1s;
+}

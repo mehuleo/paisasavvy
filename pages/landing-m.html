@@ -1,0 +1,751 @@
+<div class="navbar">
+	<div class="logo"></div>
+</div>
+
+<!-- SLIDE -->
+<div class="slide-a">
+	<h1 class="no-salt">
+		<!-- Autopilot Your Investments -->
+		We Are Here To Invest In Your Dreams!
+	</h1>
+	<!-- <h2 class="no-salt">
+		because we are here to invest in your dreams!
+	</h2> -->
+	<p class="no-salt" style="margin-top: 34px;">
+		We invest our knowledge and expertise to help you get better returns on your Mutual Fund investments, in order to fulfill your dreams. In return we do make few bucks but the joy and cheers we spread is our true return.
+	</p>
+	<div class="line-style white" style="margin: 21px auto 0px; text-align: center;">
+		<span class="a"></span><span class="b"></span><span class="c"></span><span class="d"></span>
+	</div>
+
+	<button class="getapp-icon" ng-click="openAppStore()"></button>
+</div>
+
+<!-- SLIDE -->
+<div class="slide-b">
+	<h2 class="no-salt">
+		Double Your Money While You Save TAX!
+	</h2>
+	<div class="line-style green" style="width: 100px;margin: 0px auto 13px; text-align: left;">
+		<span class="a"></span><span class="b"></span><span class="c"></span><span class="d"></span>
+	</div>
+	<!--  -->
+	<div class="investment-amount">
+        <span style="font-size:24px; vertical-align: baseline; color: #ABABAB;font-weight: 500;">₹</span>
+        {{formData.InvestmentAmount|IndianCurrency}}
+    </div>
+    <div style="line-height: 13px;color: #607D8B;font-size: 11px;letter-spacing: 0px;font-weight: 600;text-align: center;">Set Investment amount</div>
+    <md-slider class="slider" step="1000" min="1000" max="150000" ng-model="formData.InvestmentAmount"  ng-change="reCalc()"></md-slider>
+    <!--  -->
+    <div class="cell" style="width:2%;color:#B0BEC5;margin-top:7px;margin-left:5px;"> + </div>
+    <div class="cell" style="width: 20%;">
+        <span class="nums">
+            <span style="font-size:14px; vertical-align: baseline; color: #ABABAB;">₹</span> {{formData.calculation.tax|IndianCurrency}}
+        </span>
+        <div class="subs">Up to 30% TAX saving</div>
+    </div>
+    <div class="cell" style="width:2%;color:#B0BEC5;margin-top:7px;"> + </div>
+    <div class="cell" style="width: 25%;">
+        <span class="nums">
+            <span style="font-size:14px; vertical-align: baseline; color: #ABABAB;">₹</span> {{formData.calculation.return|IndianCurrency}}
+        </span>
+        <div class="subs">Expected return</div>
+    </div>
+    <div class="cell" style="width:2%;color:#B0BEC5;margin-top:7px;"> = </div>
+    <div class="cell" style="width: 26%;">
+        <span class="nums" style="color:#2E7D32;">
+            <span style="font-size:14px; vertical-align: baseline; color: #ABABAB;">₹</span> {{formData.calculation.gain|IndianCurrency}}
+        </span>
+        <div class="subs">Gain over 3 years</div>
+    </div>
+	<!--  -->
+	<div class="hr" style="margin:34px auto 8px;"></div>
+	Adjust Risk Level: 
+	<md-select ng-model="formData.riskLevel" style="display:inline-block;min-width:85px;margin:0 auto 0px;" ng-change="reCalc()">
+		<md-option ng-repeat="risk in ['low', 'moderate', 'high'] track by $index" value="{{risk}}">{{risk}}</md-option>
+	</md-select>
+	<div class="hr" style="margin: 8px auto 34px;"></div>
+    <!-- scheme cards -->
+	<div class="scheme-card" ng-repeat="card in data[formData.riskLevel].portfolio">
+	    <div class="scheme-img" style="background-image: url({{card.amcLogo}});background-color: {{card.color}};"></div>
+	    <div class="scheme-desc">
+	        <div class="inv-risk">{{card.riskGrade}}</div>
+	        <div class="inv-amnt">
+	            <span style="color:#AAA;">₹</span>{{card.weight*formData.InvestmentAmount/100|IndianCurrency}}
+	        </div>
+	        <div class="inv-amnt-sub">Investment amount ({{card.weight}}%)</div>
+	        <div class="inv-ret">Rattings: {{card.rattings}}</div>
+	    </div>
+	</div>
+	<!-- GET APP -->
+	<div class="hr" style="margin:34px auto 21px;"></div>
+	<div style="margin: 0px auto 13px;">
+		Download Paisa Savvy App and <br> make the most out of the current economy boom.
+	</div>
+	<button class="getapp-icon" ng-click="openAppStore()"></button>
+	<button class="whatsapp-icon" ng-click="openWhatsapp('api')">WhatsApp Us</button>
+</div>
+
+<!-- SLIDE -->
+<a name="howitworks"></a>
+<div class="slide-c" style="margin-top: 89px;">
+	<h2 style="width: 334px;"> Yes, it only takes a <span class="green-highlight">Minute!</span></h2>
+	<div class="line-style green" style="width: 100px; margin: 0px auto; text-align: center;">
+		<span class="a"></span><span class="b"></span><span class="c"></span><span class="d"></span>
+	</div>
+
+	<div style="height: 34px"></div>
+	<div class="how ha">
+		<div class="count">1</div>
+		<div class="step-icon i1"></div>
+		<div class="step-title green-highlight"> Review Portfolio</div>
+		<div class="step-desc">
+			We will suggest a list of funds based on your investment amount and risk profile. Our aim is to first <span class="green-highlight">preserve your wealth</span> from any downturns and then let it grow with the market.
+		</div>
+	</div>
+	<div class="hr"></div>
+	<div class="how hc">
+		<div class="count">2</div>
+		<div class="step-icon i3"></div>
+		<div class="step-title green-highlight"> Upload Documents</div>
+		<div class="step-desc">
+			Take a photo and upload <span class="green-highlight">PAN</span> Card, <span class="green-highlight">Aadhaar</span> Card and a <span class="green-highlight">Cancelled Cheque</span> via our app. As per RBI and Prevention of Money Laundering Act (PMLA) these documents are required to authenticate your identity and your bank accounts.
+		</div>
+	</div>
+	<div class="hr"></div>
+	<div class="how hd">
+		<div class="count">3</div>
+		<div class="step-icon i4"></div>
+		<div class="step-title green-highlight"> Secure Money Transfer</div>
+		<div class="step-desc">
+			Finally, transfer the money <span class="green-highlight">via NetBanking</span>. To ensure the best in class security your payments are handled via NSE (National Stock Exchange) platform and your money directly goes to National Securities Clearing Corporation Ltd accounts before hitting Mutual Fund Accounts. <!-- Please note, Credit Card or Debit Card is not allowed, only Net Banking is allowed. Once payment is done we'll provide you investment proof for TAX saving via eMail and SMS withing 2 business days. You can track your investments via our Android App. -->
+		</div>
+	</div>
+	<div class="hr"></div>
+	<div style="height: 13px"></div>
+	<!-- GET APP -->
+	<button class="getapp-icon" ng-click="openAppStore()"></button>
+	<button class="whatsapp-icon" ng-click="openWhatsapp('api')">WhatsApp Us</button>
+	<div style="height: 55px"></div>
+</div>
+<!-- SLIDE -->
+<div class="slide-ftr">
+	<div class="logo"></div>
+	<div class="line-style white" style="width: 100px; margin: -13px auto 0;">
+		<span class="a"></span><span class="b"></span><span class="c"></span><span class="d"></span>
+	</div>
+
+	<div style="height: 34px"></div>
+	<div style="height: 1px; background-color: #555; margin: 0 auto;"></div>
+	<div style="height: 34px"></div>
+
+	<center>
+		<span style="display: block; line-height: 24px;">
+			<a class="disabled" href="#" target="_blank">
+				About Us
+			</a>
+		</span>
+		<span style="display: block; line-height: 24px;">
+			<a href="https://www.paisasavvy.com/pages/terms-and-conditions.html" target="_blank">
+				Terms
+			</a>
+		</span>
+		<span style="display: block; line-height: 24px;">
+			<a href="https://www.paisasavvy.com/pages/privacy-policy.html" target="_blank">
+				Privacy Policy
+			</a>
+		</span>
+		<span style="display: block; line-height: 24px;">
+			<a href="https://www.paisasavvy.com/pages/service-agreement.html" target="_blank">
+				Service Agreement
+			</a>
+		</span>
+		<span style="display: block; line-height: 24px;">
+			<a href="mailto:hello@paisasavvy.com" target="_blank" title="Hello@PaisaSavvy.com">
+				Contact Us
+			</a>
+		</span>
+		<span style="display: block; line-height: 24px;">
+			Hello@PaisaSavvy.com
+		</span>
+
+		<div style="height: 34px"></div>
+		<div style="height: 1px; background-color: #555; margin: 0 auto;"></div>
+		<div style="height: 34px"></div>
+		<span style="margin: 0px 13px 0px 0px;">
+		    <a class="" href="//www.twitter.com/PaisaSavvy" data-reactid="175" target="_blank">
+		        <svg viewBox="0 0 64 64" width="16px" height="16px" class="" style="transform: translateY(3px) scale(1.2);">
+		            <path d="M58 15.877c-1.94.812-3.89 1.462-6.155 1.625 2.265-1.3 3.89-3.402 4.703-5.83-2.103 1.3-4.378 2.103-6.805 2.59-1.777-2.102-4.702-3.402-7.617-3.402-5.83 0-10.695 4.702-10.695 10.694 0 .813.163 1.625.325 2.428C22.85 23.494 15.07 19.279 9.727 12.8c-.975 1.625-1.462 3.402-1.462 5.342 0 3.727 1.94 6.967 4.702 8.907-1.777 0-3.402-.488-4.865-1.3v.162c0 5.18 3.728 9.395 8.582 10.37-.975.162-1.777.325-2.752.325-.65 0-1.3 0-1.94-.163 1.3 4.215 5.342 7.293 9.882 7.455-3.565 2.915-8.257 4.54-13.284 4.54-.813 0-1.777 0-2.59-.163a29.893 29.893 0 0 0 16.362 4.865c19.601 0 30.296-16.199 30.296-30.296v-1.3c2.102-1.787 3.89-3.565 5.342-5.667z" data-reactid="177" style ="fill: #FFF"></path>
+		        </svg>
+		    </a>
+		</span>
+		<span style="margin: 0px 13px 0px 0px;">
+		    <a class="" href="//www.facebook.com/PaisaSavvy" data-reactid="172" target="_blank">
+		        <svg viewBox="0 0 64 64" width="16px" height="16px" class="" style="transform: translateY(2px) scale(1.2);">
+		            <path d="M36.463 60h-10.5V32h-7v-9.625h7v-5.6C25.963 8.725 28.063 4 37.338 4h7.7v9.625h-4.9c-3.675 0-3.85 1.4-3.85 3.85v4.9h8.75L44.163 32h-7.7v28z" data-reactid="174" style ="fill: #FFF"></path>
+		        </svg>
+		    </a>
+		</span>
+
+		<div style="height: 34px"></div>
+		<div style="height: 1px; background-color: #555; margin: 0 auto;"></div>
+		<div style="height: 34px"></div>
+
+	
+		<div style="margin: 0px 0px 0px 0px; text-align: justify;">
+			Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing. Past performance is not indicative of future returns. Please consider your specific investment requirements before choosing a fund, or designing a portfolio that suits your needs.
+			<br><br>
+			PaisaSavvy is only an order collection platform that collects orders on behalf of clients and sends to relevant Asset Management Companies (AMC) for execution. The Client expressly agrees that Anaglyph Advisory Services Pvt Ltd is not liable or responsible and does not represent or warrant for any damages regarding non-execution of orders of the Client due to, but not being limited to, any link/system failure, payment failure, which may occur at the end of the client or Anaglyph Advisory Services Pvt Ltd.
+			<br><br>
+			Anaglyph Advisory Services Pvt. Ltd. makes no warranties or representations, express or implied, on products offered through the platform. It accepts no liability for any damages or losses, however caused, in connection with the use of, or on the reliance of its product or related services. Terms and conditions of the website are applicable.
+		</div>
+		<div style="height: 55px"></div>
+		<span>
+			Association of Mutual Funds in India (AMFI) registration No: 
+			<a href="//www.paisasavvy.com/ARN127961.jpg" target="_blank"> ARN-127961</a>
+		</span>
+
+		<div style="height: 34px"></div>
+		<div style="height: 1px; background-color: #555; margin: 0 auto;"></div>
+		<div style="height: 34px"></div>
+
+	
+		<span style="margin: 0px 0px 0px 0px;">
+			&#xa9; 2017 Anaglyph Advisory Services Pvt. Ltd.
+		</span>
+
+	</center>
+</div>
+
+<style type="text/css">
+	html {
+	    height: 100%;
+	    width: 100%;
+		/*min-width: 750px;*/
+		background-color: #F3F3F3;
+	}
+	body {
+	    margin: 0px;
+	    padding: 0px;
+	    height: 100%;
+		width: 100%;
+		/*min-width: 750px;*/
+	    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+	    font-size: 14px;
+	    font-weight: 500;
+	    -moz-font-feature-settings: "lnum" 1, "salt" 1;
+	    -webkit-font-feature-settings: "lnum" 1, "salt" 1;
+	    font-variant-ligatures: no-common-ligatures;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	    letter-spacing: .8px;
+	    background-color: #F3F3F3;
+	    /*background-image: url(assets/shad.png);*/
+		/*background-repeat: no-repeat;*/
+	}
+	body > .ng-scope {
+		position: relative;
+		height: 100%;
+		width: 100%;
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	a.disabled {
+		opacity: .34;
+		pointer-events: none;
+	}
+	.navbar {
+		/*position: absolute;
+		top: 0px;
+		left: 0px;
+		right: 0px;*/
+		height: 60px;
+	    background-color: #FFFFFF;
+		z-index: 1;
+	}
+	.navbar > .logo {
+		display: block;
+		margin: 0 auto;
+		height: 60px;
+		width: 150px;
+		background-image: url(/assets/logo-1x.png);
+		background-repeat: no-repeat;
+		background-position: center center;
+		vertical-align: middle;
+	}
+	.navbar .menu-items {
+		display: block;
+		width: 400px;
+		height: 60px;
+		line-height: 60px;
+		margin: -60px auto 0;
+		padding: 0;
+		list-style-type: none;
+	    vertical-align: middle;
+	}
+	.navbar .menu-items li {
+		float: left;
+	    margin: 0px 21px;
+	    font-size: 12px;
+	    font-weight: 600;
+	    text-transform: uppercase;
+	    letter-spacing: 2.1px;
+	    color: #607D8B;
+	    cursor: pointer;
+	}
+	.navbar .menu-items li:hover {
+		color: #00AB66;
+	}
+	/* --- COMMON TOGGLE ---- */
+	.no-salt {
+		-moz-font-feature-settings: "lnum" 1, "salt" 0;
+		-webkit-font-feature-settings: "lnum" 1, "salt" 0;
+	}
+	div.green-highlight,
+	span.green-highlight {
+		color: #00AB66;
+	}
+	div.orange-highlight,
+	span.orange-highlight {
+		color: #FF6F00;
+	}
+	div.cyan-highlight,
+	span.cyan-highlight {
+		color: #00BCD4;
+	}
+	div.red-highlight,
+	span.red-highlight {
+		color: #EF5350;
+	}
+	.line-style {
+		display: block;
+		width: 200px;
+		text-align: left;
+	}
+	.line-style.green > span {
+	    background: #00AB66;
+	    opacity: .8;
+	}
+	.line-style.cyan > span {
+	    background: #00BCD4;
+	}
+	.line-style.orange > span {
+	    background: #FF6F00;
+	    opacity: .8;
+	}
+	.line-style.white > span {
+	    background: #FFFFFF;
+	}
+	.line-style > .a,
+	.line-style > .b,
+	.line-style > .c,
+	.line-style > .d {
+	    width: 3px;
+	    height: 3px;
+	    margin: 13px 1.5px;
+	    display: inline-block;
+	    border-radius: 5px;
+	}
+	.line-style > .b {
+	    width: 8px;
+	}
+	.line-style > .c {
+	    width: 60px;
+	}
+	.line-style > .d {
+	    width: 10px;
+	}
+	/* -------SLIDES ---- */
+	.slide-a {
+		position: relative;
+		width: 100%;
+		padding: 21px 0 144px;
+		color: #FFFFFF;
+		text-align: center;
+		background-color: #1AAB65;
+	    box-sizing: border-box;
+		/*background: -moz-linear-gradient(top, rgba(255,255,255,0) 50%, rgba(248,248,251,1) 100%);
+		background: -webkit-linear-gradient(top, rgba(255,255,255,0) 50%,rgba(248,248,251,1) 100%);
+		background: linear-gradient(to bottom, rgba(255,255,255,0) 50%,rgba(248,248,251,1) 100%);*/
+	}
+	.slide-a > h1,
+	.slide-b > h2,
+	.slide-a > h2 {
+		margin: 0 auto;
+		line-height: 34px;
+		width: 80%;
+		font-size: 24px;
+		font-weight: 600;
+		-moz-font-feature-settings: "lnum" 1, "salt" 0;
+		-webkit-font-feature-settings: "lnum" 1, "salt" 0;
+		letter-spacing: 0;
+		text-align: center;
+		color: inherit;
+	}
+	.slide-b > h2 {
+		font-size: 22px;
+	}
+	.slide-a > p {
+		display: block;
+		width: 89%;
+		margin: 0 auto;
+		line-height: 22px;
+		font-size: 15px;
+		font-weight: 600;
+		color: #607D8B;
+		color: #9B9B9B;
+		color: inherit;
+		letter-spacing: .5px;
+		/*text-align: center;*/
+	}
+	button.signup {
+		height: 55px;
+		width: 300px;
+		background: #00AB66;
+		color: #FFFFFF;
+		font-size: 14px;
+		font-weight: 600;
+		text-transform: uppercase;
+		text-align: center;
+		border-radius: 3px;
+		border: none;
+		outline: none;
+		letter-spacing: 1.3px;
+		cursor: pointer;
+		box-sizing: border-box;
+	}
+	button.signup:hover {
+		border-bottom: 5px solid #2E7D32;
+	}
+	/* --------- */
+	.slide-b {
+		position: relative;
+		min-height: 144px;
+		margin: -118px auto 0px;
+		padding: 21px 0;
+		background: #FFF;
+	}
+	div.hr {
+	    width: 95vw;
+	    height: 1px;
+	    background: #CFD8DC;
+	}
+	.scheme-card {
+	    width: 89vw;
+	    height: 110px;
+	    margin: 2.5vw auto 0;
+	    border-radius: 3px;
+	    text-align: left;
+	    background: #fff;
+	    box-shadow: 1px 2px 3px rgba(0, 0, 0, .24);
+	    overflow: hidden;
+	}
+	.scheme-card > .scheme-img {
+	    display: inline-block;
+	    width: 45%;
+	    height: 110px;
+	    background-color: #f38fb1;
+	    /*background-image: url(img/hdfcmf-logo.png);*/
+	    background-size: 100px;
+	    background-repeat: no-repeat;
+	    background-position: center;
+	    vertical-align: top;
+	}
+	.scheme-card > .scheme-desc {
+	    display: inline-block;
+	    width: 52%;
+	    height: 110px;
+	    vertical-align: top;
+	}
+	.scheme-card > .scheme-desc .inv-risk {
+	    margin: 6px auto 0px;
+	    color: #4CAF50;
+	    font-size: 12px;
+	    font-weight: 600;
+	    text-align: center;
+	    letter-spacing: .3px;
+	    text-transform: uppercase;
+	}
+	.scheme-card > .scheme-desc .inv-amnt {
+	    margin: 16px 0px 0px;
+	    color: #343434;
+	    font-size: 18px;
+	    text-align: center;
+	}
+	.scheme-card > .scheme-desc .inv-amnt-sub {
+	    line-height: 16px;
+	    color: #90A4AE;
+	    font-size: 10px;
+	    text-align: center;
+	    letter-spacing: .5px;
+	}
+	.scheme-card > .scheme-desc .inv-ret {
+	    margin: 14px auto 0px;
+	    color: #607D8B;
+	    font-size: 12px;
+	    text-align: center;
+	}
+	.slide-b {
+		display: block;
+		width: 95vw;
+		text-align: center;
+		border-radius: 3px;
+		box-sizing: border-box;
+		box-shadow: 1px 2px 3px rgba(0, 0, 0, .21);
+		overflow: hidden;
+		z-index: 5;
+	}
+	.slide-b > .txt-lbl {
+	    line-height: 20px;
+	    margin: 0px auto 3px;
+	    color: #607D8B;
+	    font-size: 12px;
+	    letter-spacing: .5px;
+	}
+	.slide-b > .investment-amount {
+	    margin: 5px auto 3px;
+	    color: #43A047;
+	    font-size: 21px;
+	    font-weight: 500;
+	}
+	.slide-b > .txt-box {
+	    width: 40%;
+	    line-height: 34px;
+	    margin: 0px auto 21px;
+	    font-size: 18px;
+	    letter-spacing: 0px;
+	    text-align: center;
+	    border-radius: 3px;
+	    border: 1px solid #607D8B;
+	    outline: none;
+	}
+	.slide-b > .cell {
+	    display: inline-block;
+	    vertical-align: top;
+	}
+	.slide-b > .cell > .nums {
+	    display: block;
+	    line-height: 30px;
+	    color: #455A64;
+	    font-size: 14px;
+	    font-weight: 700;
+	    letter-spacing: .5px;
+	}
+	.slide-b > .cell > .subs {
+	    line-height: 13px;
+	    color: #607D8B;
+	    font-size: 11px;
+	    letter-spacing: 0px;
+	    font-weight: 600;
+	    text-align: center;
+	}
+	.slide-b .slider {
+		width: 80%;
+		max-width: 550px;
+		margin: -8px auto 0;
+		cursor: pointer;
+		touch-action: none;
+	}
+	/* --------------- */
+	.slide-c {
+		position: relative;
+		display: block;
+		margin: 0 auto;
+		text-align: center;
+		background-color: #F3F3F3;
+	}
+	.slide-c > .line-t {
+		position: absolute;
+		display: block;
+		top: 126px;
+		left: 0px;
+		right: 0px;
+		width: 500px;
+		height: 1px;
+		margin: 0 auto;
+		background-color: #DCDCDC;
+		z-index: 0;
+	}
+	.slide-c > h2 {
+		margin: 0 auto;
+		line-height: 42px;
+		font-size: 27px;
+		font-weight: 400;
+		-moz-font-feature-settings: "lnum" 1, "salt" 0;
+		-webkit-font-feature-settings: "lnum" 1, "salt" 0;
+		letter-spacing: 0;
+		color: #343434;
+	}
+	.slide-c .how {
+		position: relative;
+		display: inline-block;
+		width: 250px;
+		padding: 45px 0 0;
+		margin: 0px -3px;
+		text-align: center;
+		vertical-align: top;
+	}
+	.slide-c .how .count {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 34px;
+	    line-height: 34px;
+	    margin: 0 auto 13px;
+	    border-radius: 50px;
+	    border: 1px solid #9B9B9B;
+	    text-align: center;
+	    color: #9B9B9B;
+	    background-color: #FFFFFF;
+	}
+	.slide-c .how .step-icon {
+		margin: 0px 0px 0px;
+		width: 80px;
+		height: 80px;
+		margin: 0 auto;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+	.slide-c .how .step-icon.i1 {
+		background-image: url(assets/briefcase-i.png);
+	}
+	.slide-c .how .step-icon.i2 {
+		background-image: url(assets/aadhar-i.png);
+	}
+	.slide-c .how .step-icon.i3 {
+		background-image: url(assets/cheque-i.png);
+	}
+	.slide-c .how .step-icon.i4 {
+		background-image: url(assets/payment-i.png);
+	}
+	.slide-c .how .step-title {
+		margin: 13px 0px 0px;
+		line-height: 30px;
+		font-size: 16px;
+		font-weight: 500;
+		/*color: #4CAF50;*/
+		/*color: #FF6F00;*/
+		-moz-font-feature-settings: "lnum" 1, "salt" 0;
+		-webkit-font-feature-settings: "lnum" 1, "salt" 0;
+	}
+	.slide-c .how .step-desc {
+		margin: 13px 0px 13px;
+		padding: 0px 21px;
+		line-height: 16px;
+		font-size: 12px;
+		font-weight: 500;
+		color: #9B9B9B;
+		box-sizing: border-box;
+		text-align: justify;
+	}
+	/* --------- */
+	.slide-ftr {
+		position: relative;
+		display: block;
+		padding: 34px 13px 21px;
+		color: #F0F0F0;
+		background-color: #262626;
+		box-sizing: border-box;
+	}
+	.slide-ftr  a:hover {
+		text-decoration: underline;
+	}
+	.slide-ftr > .logo {
+		height: 50px;
+	    width: 150px;
+	    margin: 0 auto;
+	    background-image: url(/assets/logo-inv-1x.png);
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	}
+	/*    */
+	button.getapp-icon {
+		display: inline-block;
+		width: 180px;
+		height: 45px;
+		margin: 8px;
+		border: none;
+		border-radius: 2px;
+		background: url(assets/playstore.png);
+		background-size: 180px 45px;
+		background-repeat: no-repeat;
+		text-decoration: none;
+		vertical-align: middle;
+		outline: none;
+		cursor: pointer;
+	}
+	button.whatsapp-icon {
+		display: inline-block;
+		width: 180px;
+		height: 45px;
+		line-height: 45px;
+		margin: 8px;
+		padding: 0px 21px 0 45px;
+		color: #FFFFFF;
+		font-size: 14px;
+		font-weight: 600;
+		text-transform: uppercase;
+		text-align: center;
+		letter-spacing: 1.3px;
+		background: #3ebe2b url(assets/whatsapp-icon.png);
+		background-size: 45px 45px;
+		background-position: left center;
+		background-repeat: no-repeat;
+		border: none;
+		border-radius: 2px;
+		text-decoration: none;
+		vertical-align: middle;
+		outline: none;
+		cursor: pointer;
+		box-sizing: border-box;
+	}
+	div.hr { 
+		width: 66%;
+		height: 1px;
+		/*max-width: 800px;*/
+		margin: 21px auto;
+		background-color: #CFD8DC;
+	}
+	.hide {
+		display: none;
+	}
+	/* Overrides */
+	.slider .md-track.md-track-fill{
+	    background-color: #4DB6AC;
+	}
+	.slider .md-thumb {
+	    top: 7px;
+	    width: 34px;
+	    height: 34px;
+	    border-radius: 40px;
+	}
+	.slider .md-thumb:after {
+	    width: 34px;
+	    height: 34px;
+	    left: 0px;
+	    border-radius: 40px;
+	    border-color: #4DB6AC;
+	    background-color: #4DB6AC;
+	}
+	.slider .md-track {
+	    background-color: #DDDDDD;
+	}
+	.slider .md-focus-ring {
+	    background-color: rgba(0, 192, 142, 0.34);
+	}
+	md-select .md-select-value {
+	    height: 30px;
+	    line-height: 30px;
+	    border-bottom-width: 0px;
+	    box-sizing: border-box;
+	}
+	md-select.md-default-theme:not([disabled]):focus .md-select-value, 
+	md-select:not([disabled]):focus .md-select-value {
+	    color: inherit;
+	    border-bottom-color: transparent;
+	}
+</style>

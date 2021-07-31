@@ -1,0 +1,95 @@
+<div style="
+    position: fixed;
+    z-index: 100;
+    width: 150px;
+    height: 200px;
+    top: 100px;
+    left: 10px;
+    overflow: scroll;
+    background: red;
+" id="aa"> alsdf ajlfk asjldf jasdlfkjasldfkjasd flajskdf lasdkjf laskjfdals kdfjalsk dfjlaksjdf laksjdf laksjdf laskdjflkas djflkas djflkasj dflkasj dflkasjd flkas jdflkas jdflkasdj flkasjdfklasjdflkajsd flkajsdf lkasdjflksdjflksdjfalksfj alskjf alksjf lkasj flkasjflasjfdlaksdjflasdjflasjdfl xxxxx</div>
+
+
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<div class="area">
+    <div ng-class="{left: d.type == 'utext' || d.type == 'ellipsis', center: d.type == 'action', right: d.type == 'metext' }" ng-repeat="d in messages track by $index">
+
+        <div style="height: 13px" ng-if="!d.text.length"></div>
+        <div id="{{d.uid}}" class="animated box metext " ng-if="d.text.length && d.type=='metext'">{{d.text}}</div>
+        <div id="{{d.uid}}" class="animated box utext" ng-class="{fadeInLeft:d.type=='ellipsis'}" ng-if="d.text.length && d.type=='utext' || d.type=='ellipsis'">{{d.text}}</div>
+        <div class=" cta " ng-if="d.type=='action'" ng-click="goto(d)">
+            {{d.text}}
+        </div>
+    </div>
+
+</div>
+
+<style type="text/css">
+html, body {
+    background-color: #F0F0F5;
+}
+.area {
+	padding: 34px 20px 55px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.box.el {
+    max-width: 34px;
+}
+.box {
+    display: inline-block;
+    position: relative;
+    max-width: 21px;
+    min-width: 21px;
+    line-height: 26px;
+    margin: 2px 0 0px 0;
+    padding: 10px 13px;
+    color: #000000;
+    font-size: 15px;
+    font-family: 'Libre Baskerville';
+    letter-spacing: 0px; 
+    text-align: left;
+    background: #FFFFFF;
+    border-radius: 0px 5px 5px 5px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.21);
+    transition: max-width .21s ease;
+    overflow: hidden;
+}
+.cta {
+    display: inline-block;
+    position: relative;
+    max-width: 80%;
+    min-width: 21px;
+    line-height: 26px;
+    margin: 21px 8px;
+    padding: 10px 13px;
+    color: #004D40;
+    font-size: 15px;
+    font-family: 'Libre Baskerville';
+    letter-spacing: 0px;
+    text-align: center;
+    border: 1px solid #004D40;
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+}
+.box.metext {
+    max-width: 75%;
+    margin: 8px 0px;
+    color: #fff;
+    background: #004D40;
+    border-radius: 5px 0px 5px 5px;
+}
+
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
+}
+</style>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Prata" rel="stylesheet">

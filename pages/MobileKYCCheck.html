@@ -1,0 +1,436 @@
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+</head>
+<div style="display: block; height: 44px; background: black;"></div>
+<div class="logo">Paisa Savvy</div>
+<div class="menu-icon" ng-click="mOpenMenu()" ng-hide="mobileData.showMenu"></div>
+<div class="menu-container" ng-show="mobileData.showMenu">
+    <div class="close-btn" ng-click="mCloseMenu()">X</div>
+    <div class="li" ng-click="doLogout()">Log Out</div>
+    <!-- <div class="li" ng-click="gotoPath('faq')">FAQ</div> -->
+    <div class="li">
+        <a href="//www.paisasavvy.com/pages/terms-and-conditions.html" target="_blank">Terms</a>
+    </div>
+</div>
+<!-- Step tracker -->
+<div class="steps-container" style="margin: 21px auto 34px;">
+    <p style="width:100%; text-align: center;">1/4</p>
+    <div class="step filled"></div>
+    <div class="step"></div>
+    <div class="step"></div>
+    <div class="step"></div>
+</div>
+<!-- // Step tracker -->
+<div class="card center" style="text-align: center;">
+    <h2>Let's quikly check your KYC status.</h2>
+    <input type="text" class="text upper" ng-model="data.pan" placeholder="Enter Your PAN" ng-blur="textTransform()" maxlength="10">
+    <br>
+    <div class="texterror" ng-if="data.error">{{data.error}}</div>
+    <br>
+    <button type="button" class="main-cta-btn pink" ng-click="getKYC()" style="margin-top: 8px;" ng-hide="loading">
+    Check KYC Status
+    </button>
+    <!--  -->
+    <div class="main-cta-btn pink" ng-show="loading">
+        <div class="loading">
+            <span class="a"></span><span class="b"></span><span class="c"></span>
+        </div>
+    </div>
+</div>
+<p style="margin: 21px auto 34px;">
+    As per RBI (Reserve Bank of India) and SEBI (Security and Exchange Board of India) regulations all investors need to provide KYC (Know Your Customer) information before investing. KYC is a one time process. Don't worry if you have not gone through this process brefore, we'll get your Aadhar based e-KYC within few seconds.
+</p>
+<!--  -->
+
+<!-- Footer -->
+<div style="height: 34px"></div>
+<div class="slide-ftr">
+    <center>
+        <!-- <span style="display: block; line-height: 24px;">
+            <a class="disabled" href="#" target="_blank">
+                About Us
+            </a>
+        </span> -->
+        <span style="display: block; line-height: 24px;" ng-click="gotoPath('/faq')">
+            FAQ
+        </span>
+        <span style="display: block; line-height: 24px;">
+            <a href="https://www.paisasavvy.com/pages/terms-and-conditions.html" target="_blank">
+                Terms
+            </a>
+        </span>
+        <span style="display: block; line-height: 24px;">
+            <a href="https://www.paisasavvy.com/pages/privacy-policy.html" target="_blank">
+                Privacy Policy
+            </a>
+        </span>
+        <span style="display: block; line-height: 24px;">
+            <a href="https://www.paisasavvy.com/pages/service-agreement.html" target="_blank">
+                Service Agreement
+            </a>
+        </span>
+        <div class="hr"></div>
+        <span style="display: block; line-height: 24px;">
+            <b>Contact Us</b>
+        </span>
+        <span style="display: block; line-height: 24px;">
+            +91 9845 900942
+        </span>
+        <span style="display: block; line-height: 24px;">
+            hello@PaisaSavvy.com
+        </span>
+        <div class="hr"></div>
+        <button class="whatsapp-icon" ng-click="openWhatsapp('api')">WhatsApp Us</button>
+
+        <div style="height: 34px"></div>
+        <div style="height: 1px; background-color: #555; margin: 0 auto;"></div>
+        <div style="height: 34px"></div>
+        <span style="margin: 0px 13px 0px 0px;">
+            <a class="" href="//www.twitter.com/PaisaSavvy" data-reactid="175" target="_blank">
+                <svg viewBox="0 0 64 64" width="16px" height="16px" class="" style="transform: translateY(3px) scale(1.2);">
+                    <path d="M58 15.877c-1.94.812-3.89 1.462-6.155 1.625 2.265-1.3 3.89-3.402 4.703-5.83-2.103 1.3-4.378 2.103-6.805 2.59-1.777-2.102-4.702-3.402-7.617-3.402-5.83 0-10.695 4.702-10.695 10.694 0 .813.163 1.625.325 2.428C22.85 23.494 15.07 19.279 9.727 12.8c-.975 1.625-1.462 3.402-1.462 5.342 0 3.727 1.94 6.967 4.702 8.907-1.777 0-3.402-.488-4.865-1.3v.162c0 5.18 3.728 9.395 8.582 10.37-.975.162-1.777.325-2.752.325-.65 0-1.3 0-1.94-.163 1.3 4.215 5.342 7.293 9.882 7.455-3.565 2.915-8.257 4.54-13.284 4.54-.813 0-1.777 0-2.59-.163a29.893 29.893 0 0 0 16.362 4.865c19.601 0 30.296-16.199 30.296-30.296v-1.3c2.102-1.787 3.89-3.565 5.342-5.667z" data-reactid="177" style ="fill: #FFF"></path>
+                </svg>
+            </a>
+        </span>
+        <span style="margin: 0px 13px 0px 0px;">
+            <a class="" href="//www.facebook.com/PaisaSavvy" data-reactid="172" target="_blank">
+                <svg viewBox="0 0 64 64" width="16px" height="16px" class="" style="transform: translateY(2px) scale(1.2);">
+                    <path d="M36.463 60h-10.5V32h-7v-9.625h7v-5.6C25.963 8.725 28.063 4 37.338 4h7.7v9.625h-4.9c-3.675 0-3.85 1.4-3.85 3.85v4.9h8.75L44.163 32h-7.7v28z" data-reactid="174" style ="fill: #FFF"></path>
+                </svg>
+            </a>
+        </span>
+
+        <div style="height: 34px"></div>
+        <div style="height: 1px; background-color: #555; margin: 0 auto;"></div>
+        <div style="height: 34px"></div>
+
+    
+        <div style="margin: 0px 0px 0px 0px; text-align: justify;">
+            Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing. Past performance is not indicative of future returns. Please consider your specific investment requirements before choosing a fund, or designing a portfolio that suits your needs.
+            <br><br>
+            PaisaSavvy is only an order collection platform that collects orders on behalf of clients and sends to relevant Asset Management Companies (AMC) for execution. The Client expressly agrees that Anaglyph Advisory Services Pvt Ltd is not liable or responsible and does not represent or warrant for any damages regarding non-execution of orders of the Client due to, but not being limited to, any link/system failure, payment failure, which may occur at the end of the client or Anaglyph Advisory Services Pvt Ltd.
+            <br><br>
+            Anaglyph Advisory Services Pvt. Ltd. makes no warranties or representations, express or implied, on products offered through the platform. It accepts no liability for any damages or losses, however caused, in connection with the use of, or on the reliance of its product or related services. Terms and conditions of the website are applicable.
+        </div>
+        <div style="height: 55px"></div>
+        <span>
+            Association of Mutual Funds in India (AMFI) registration No: 
+            <a href="//www.paisasavvy.com/ARN127961.jpg" target="_blank"> ARN-127961</a>
+        </span>
+
+        <div style="height: 34px"></div>
+        <div style="height: 1px; background-color: #555; margin: 0 auto;"></div>
+        <div style="height: 34px"></div>
+
+    
+        <span style="margin: 0px 0px 0px 0px;">
+            &#xa9; 2017 Anaglyph Advisory Services Pvt. Ltd.
+        </span>
+
+    </center>
+</div>
+<!--  -->
+<style type="text/css">
+html {
+    min-height: 100%;
+    width: 100%;
+    background-color: #F5F5F9;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    min-height: 100%;
+    width: 100%;
+    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    -moz-font-feature-settings: "lnum" 1, "salt" 1;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 1;
+    font-variant-ligatures: no-common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: transparent;
+}
+
+body>.ng-scope {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.logo {
+    position: absolute;
+    display: block;
+    top: 0px;
+    left: 5px;
+    width: 144px;
+    line-height: 44px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    background: #000000;
+    letter-spacing: 2.5px;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+}
+
+a.disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+
+.menu-icon {
+    position: absolute;
+    display: block;
+    top: 2px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: #000000;
+    background-image: url(assets/hamburger-FFFFFF.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    z-index: 1;
+}
+.menu-container {
+    position: absolute;
+    display: block;
+    top: 5px;
+    right: 5px;
+    width: 180px;
+    height: 180px;
+    padding: 50px 13px 0;
+    color: #000000;
+    text-align: right;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    z-index: 1;
+}
+.menu-container > .close-btn {
+    position: absolute;
+    display: block;
+    right: 0px;
+    top: 0px;
+    width: 44px;
+    line-height: 44px;
+    margin: 0px;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 600;
+    background: #000;
+    text-align: center;
+    text-transform: uppercase;
+}
+.menu-container > .li {
+    line-height: 44px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    outline: none;
+}
+
+/* --------------------
+------  COMMON   ------
+-------------------- */
+.steps-container {
+    text-align: center;
+}
+.steps-container > .step {
+    display: inline-block;
+    width: 26px;
+    height: 2px;
+    margin: 0px 2px;
+    background: #B0BEC5;
+}
+.steps-container > .step.filled {
+    background: #4C83FB;
+    box-shadow: 0px 3px 21px rgba(76, 131, 251, 0.55);
+}
+
+h1 {
+    width: 100%;
+    line-height: 40px;
+    margin: 0 auto;
+    color: #263238;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+h2 {
+    width: 89vw;
+    line-height: 38px;
+    margin: 21px auto;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    color: #37474F;
+    text-align: center;
+}
+
+p {
+    display: block;
+    width: 92%;
+    margin: 0 auto;
+    line-height: 22px;
+    font-size: 14px;
+    font-weight: 500;
+    color: inherit;
+    color: #607D8B;
+    letter-spacing: .55px;
+    text-align: left;
+}
+
+.card {
+    width: 94%;
+    margin: 13px auto;
+    padding: 21px 1px;
+    background: #FFF;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* --------------------
+------  FOOTER   ------
+-------------------- */
+
+.slide-ftr {
+    position: relative;
+    display: block;
+    padding: 34px 13px 21px;
+    color: #F0F0F0;
+    background-color: #262626;
+    box-sizing: border-box;
+}
+.slide-ftr  a:hover {
+    text-decoration: underline;
+}
+.slide-ftr > .logo {
+    height: 50px;
+    width: 150px;
+    margin: 0 auto;
+    background-image: url(/assets/logo-inv-1x.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* --------------------
+------  BUTTON   ------
+-------------------- */
+.texterror {
+    line-height: 20px;
+    margin: 13px auto;
+    color: #E53935;
+    font-size: 14px;
+}
+input.text {
+    width: 89%;
+    max-width: 500px;
+    line-height: 55px;
+    height: 55px;
+    padding: 0px 13px;
+    font-size: 18px;
+    border: 2px solid #000000;
+    letter-spacing: 3.4px;
+    box-sizing: border-box;
+    outline: none;
+}
+input.text::placeholder {
+    font-size: 15px;
+    letter-spacing: 0px;
+}
+.main-cta-btn {
+    display: block;
+    width: 89%;
+    max-width: 500px;
+    height: 55px;
+    line-height: 55px;
+    margin: 0px auto;
+    padding: 0px 21px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: .21px;
+    background: #2196F3;
+    border: none;
+    border-radius: 2px;
+    text-decoration: none;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.main-cta-btn.pink {
+    background-color: #E91E63;
+}
+
+button.getapp-icon {
+    display: inline-block;
+    width: 180px;
+    height: 45px;
+    margin: 8px;
+    border: none;
+    border-radius: 2px;
+    background: url(assets/playstore.png);
+    background-size: 180px 45px;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+}
+
+button.whatsapp-icon {
+    display: inline-block;
+    width: 180px;
+    height: 45px;
+    line-height: 45px;
+    margin: 8px;
+    padding: 0px 21px 0 45px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1.3px;
+    background: #3ebe2b url(assets/whatsapp-icon.png);
+    background-size: 45px 45px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 2px;
+    text-decoration: none;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+div.hr {
+    width: 66%;
+    height: 1px;
+    /*max-width: 800px;*/
+    margin: 21px auto;
+    background-color: #CFD8DC;
+}
+
+.hide {
+    display: none;
+}
+
+</style>

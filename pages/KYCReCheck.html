@@ -1,0 +1,161 @@
+<div class="navbar">
+    <div class="logo"></div>
+    <ul class="menu-items">
+        <!-- <li></li> -->
+        <!-- <a href="">
+            <li>Log Out</li>
+        </a> -->
+    </ul>
+</div>
+<!-- //Nav -->
+<div style="height: 89px;"></div>
+<!-- Step tracker -->
+<div class="step-tracker">
+    <span class="step-back">
+        &nbsp;
+        <!-- <span class="back-icon">&#9668;</span> Back -->
+    </span>
+    <span class="step-count">1/5</span>
+    <span class="progress-container"></span>
+    <span class="progress-bar" style="width:{{stepProgress}}%;"></span>
+    <span class="current-step" style="left:{{stepProgress}}%">KYC Status Re-Check</span>
+</div>
+<!-- // Step tracker -->
+<br><br><br><br>
+<div class="card center">
+    <h2>Let's quikly re-check your KYC status.</h2>
+    <p style="margin: 21px auto 34px;">
+        As per RBI (Reserve Bank of India) and SEBI (Security and Exchange Board of India) regulations all investors need to provide KYC (Know Your Customer) information before investing. KYC is a one time process. Don't worry if you have not gone through this process brefore, we'll get your Aadhar based e-KYC within few seconds.
+    </p>
+    <input type="text" class="text upper" ng-model="data.pan" placeholder="Enter Your PAN" ng-blur="textTransform()" maxlength="10">
+    <br>
+    <span class="texterror" ng-if="data.error">{{data.error}}</span>
+    <br>
+    <button type="button" class="main-cta-btn pink" ng-click="getKYC()" style="margin-top: 34px;">
+    Check KYC Status
+    </button>
+</div>
+<!-- //Card -->
+<br><br><br>
+<!-- <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p> -->
+<br><br>
+
+<style type="text/css">
+@import url("styles/card.css");
+
+html {
+    height: 100%;
+    width: 100%;
+    background-color: #F5F6FA;
+}
+
+body {
+    margin: 0px auto;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
+    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-ligatures: no-common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "lnum" 1, "salt" 0;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 0;
+    letter-spacing: .8px;
+    background-color: transparent;
+}
+
+body>.ng-scope {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: none;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+a.disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+
+.navbar {
+    position: relative;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    background-color: rgba(255,255,255,.92);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.navbar > .logo {
+    display: inline-block;
+    margin-left: 60px;
+    height: 60px;
+    width: 100px;
+    background-image: url(assets/logo-100px-E91E63.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    vertical-align: middle;
+    opacity: .7;
+}
+
+.navbar .menu-items {
+    position: absolute;
+    display: block;
+    top: 60px;
+    right: 0px;
+    width: 400px;
+    height: 55px;
+    line-height: 55px;
+    margin: -60px auto 0;
+    padding: 0;
+    list-style-type: none;
+    vertical-align: middle;
+}
+
+.navbar .menu-items li {
+    float: left;
+    margin: 0px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .34px;
+    color: #2196F3;
+    color: #1976D2;
+    color: #212121;
+    color: #E91E63;
+    cursor: pointer;
+}
+
+.navbar .menu-items li:hover {
+    color: #212121;
+}
+
+
+/* ------  -------*/
+
+
+/* ------  -------*/
+</style>

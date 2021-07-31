@@ -1,0 +1,474 @@
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+</head>
+<div style="display: block; height: 44px; background: black;"></div>
+<div class="logo">Paisa Savvy</div>
+<div class="menu-icon" ng-click="mOpenMenu()" ng-hide="mobileData.showMenu"></div>
+<div class="menu-container" ng-show="mobileData.showMenu">
+    <div class="close-btn" ng-click="mCloseMenu()">X</div>
+    <div class="li" ng-click="doLogout()">Log Out</div>
+    <!-- <div class="li" ng-click="gotoPath('faq')">FAQ</div> -->
+    <div class="li">
+        <a href="//www.paisasavvy.com/pages/terms-and-conditions.html" target="_blank">Terms</a>
+    </div>
+</div>
+<!-- Step tracker -->
+<div class="steps-container" style="margin: 21px auto 34px;">
+    <p style="width:100%; text-align: center;">2/4</p>
+    <div class="step filled"></div>
+    <div class="step filled"></div>
+    <div class="step"></div>
+    <div class="step"></div>
+</div>
+<!-- // Step tracker -->
+<div class="card center" style="text-align: center;">
+    <h2>
+        Your KYC information doesn't exist.
+        Let's get it done within few seconds.
+    </h2>
+    <p style="margin: 21px auto 34px;">
+        E-KYC is a completetly online and paperless process which will only take a few minutes. 
+        We will send you a OTP to validate your Aadhaar Number on your <b>Aadhaar linked phone</b>.
+        Please note, if you don't have your phone linked with Aadhaar already, you will not be able to complete this process.
+    </p>
+    <!-- name -->
+    <div class="container">
+        <div class="label">Investor Name
+            <span class="error">{{formData.Error.name}}</span>
+        </div>
+        <input type="text" class="text" id="name" name="name" placeholder="" ng-model="formData.name" />
+    </div>
+    <!-- Mobile -->
+    <div class="container">
+        <div class="label">Mobile
+            <span class="error">{{formData.Error.mobile}}</span>
+        </div>
+        <input type="text" class="text" id="mobile" name="mobile" placeholder="" ng-model="formData.mobile" disabled="disabled" />
+    </div>
+    <!-- aadhaar -->
+    <div class="container">
+        <div class="label">Aadhaar Number
+            <span class="error">{{formData.Error.aadhaar}}</span>
+        </div>
+        <input type="text" class="text" id="aadhaar" name="aadhaar" placeholder="" ng-model="formData.aadhaar" />
+    </div>
+    <!-- PAN -->
+    <div class="container">
+        <div class="label">PAN
+            <span class="error">{{formData.Error.pan}}</span>
+        </div>
+        <input type="text" class="text" id="pan" name="pan" placeholder="" ng-model="formData.pan" />
+    </div>
+    <!-- Email -->
+    <div class="container">
+        <div class="label">Email ID
+            <span class="error">{{formData.Error.email}}</span>
+        </div>
+        <input type="text" class="text" id="email" name="email" placeholder="" ng-model="formData.email" />
+    </div>
+    <!-- dummy -->
+    <div class="container">
+        <!--  -->
+    </div>
+    <br>
+    <div class="label" style="margin-top: 13px; text-align: center;">
+        <span class="error" style="text-align: center;">{{formData.Error.common}}</span>
+    </div>
+    <br>
+    <button type="button" class="main-cta-btn pink" ng-click="validate()" style="margin-top: 13px;">
+        Generate Aadhaar OTP
+    </button>
+</div>
+
+<div style="height: 89px;"></div>
+<!--  -->
+<style type="text/css">
+html {
+    min-height: 100%;
+    width: 100%;
+    background-color: #F5F5F9;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    min-height: 100%;
+    width: 100%;
+    font-family: Raleway, 'Open Sans', Helvetica, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    -moz-font-feature-settings: "lnum" 1, "salt" 1;
+    -webkit-font-feature-settings: "lnum" 1, "salt" 1;
+    font-variant-ligatures: no-common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: transparent;
+}
+
+body>.ng-scope {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.logo {
+    position: absolute;
+    display: block;
+    top: 0px;
+    left: 5px;
+    width: 144px;
+    line-height: 44px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    background: #000000;
+    letter-spacing: 2.5px;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+}
+
+a.disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+
+.menu-icon {
+    position: absolute;
+    display: block;
+    top: 2px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: #000000;
+    background-image: url(assets/hamburger-FFFFFF.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    z-index: 1;
+}
+.menu-container {
+    position: absolute;
+    display: block;
+    top: 5px;
+    right: 5px;
+    width: 180px;
+    height: 180px;
+    padding: 50px 13px 0;
+    color: #000000;
+    text-align: right;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    z-index: 1;
+}
+.menu-container > .close-btn {
+    position: absolute;
+    display: block;
+    right: 0px;
+    top: 0px;
+    width: 44px;
+    line-height: 44px;
+    margin: 0px;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 600;
+    background: #000;
+    text-align: center;
+    text-transform: uppercase;
+}
+.menu-container > .li {
+    line-height: 44px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    outline: none;
+}
+
+/* --------------------
+------  COMMON   ------
+-------------------- */
+.steps-container {
+    text-align: center;
+}
+.steps-container > .step {
+    display: inline-block;
+    width: 26px;
+    height: 2px;
+    margin: 0px 2px;
+    background: #B0BEC5;
+}
+.steps-container > .step.filled {
+    background: #4C83FB;
+    box-shadow: 0px 3px 21px rgba(76, 131, 251, 0.55);
+}
+
+h1 {
+    width: 100%;
+    line-height: 40px;
+    margin: 0 auto;
+    color: #263238;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+h2 {
+    width: 89vw;
+    line-height: 38px;
+    margin: 21px auto;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    color: #37474F;
+    text-align: center;
+}
+
+p {
+    display: block;
+    width: 92%;
+    margin: 0 auto;
+    line-height: 22px;
+    font-size: 14px;
+    font-weight: 500;
+    color: inherit;
+    color: #607D8B;
+    letter-spacing: .55px;
+    text-align: left;
+}
+p.center { 
+    text-align: center;
+}
+.card {
+    width: 94%;
+    margin: 13px auto;
+    padding: 21px 1px;
+    background: #FFF;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* --------------------
+------  FOOTER   ------
+-------------------- */
+
+.slide-ftr {
+    position: relative;
+    display: block;
+    padding: 34px 13px 21px;
+    color: #F0F0F0;
+    background-color: #262626;
+    box-sizing: border-box;
+}
+.slide-ftr  a:hover {
+    text-decoration: underline;
+}
+.slide-ftr > .logo {
+    height: 50px;
+    width: 150px;
+    margin: 0 auto;
+    background-image: url(/assets/logo-inv-1x.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* --------------------
+------  BUTTON   ------
+-------------------- */
+.error,
+.texterror {
+    display: block;
+    width: 100%;
+    line-height: 20px;
+    margin: 0 auto;
+    color: #E53935;
+    font-size: 14px;
+    text-align: left;
+}
+.container {
+    width: 100%;
+    margin: 21px auto;
+}
+.label {
+    width: 89%;
+    line-height: 20px;
+    margin: 0 auto;
+    color: #607D8B;
+    font-size: 14px;
+    text-align: left;
+}
+div.text,
+input.text {
+    height: 44px;
+    line-height: 44px;
+    width: 89%;
+    max-width: 500px;
+    margin: 0px auto 0;
+    padding: 0px 21px;
+    color: #263238;
+    font-size: 14px;
+    text-align: left;
+    border: 1px solid #B0BEC5;
+    border-radius: 3px;
+    background: transparent;
+    outline: none;
+    box-sizing: border-box;
+}
+input.text::placeholder {
+    font-size: 15px;
+    letter-spacing: 0px;
+}
+button.main-cta-btn {
+    display: block;
+    width: 89%;
+    max-width: 500px;
+    height: 55px;
+    line-height: 55px;
+    margin: 0px auto;
+    padding: 0px 21px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: .21px;
+    background: #2196F3;
+    border: none;
+    border-radius: 2px;
+    text-decoration: none;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+button.main-cta-btn.pink {
+    background-color: #E91E63;
+}
+
+button.getapp-icon {
+    display: inline-block;
+    width: 180px;
+    height: 45px;
+    margin: 8px;
+    border: none;
+    border-radius: 2px;
+    background: url(assets/playstore.png);
+    background-size: 180px 45px;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+}
+
+button.whatsapp-icon {
+    display: inline-block;
+    width: 180px;
+    height: 45px;
+    line-height: 45px;
+    margin: 8px;
+    padding: 0px 21px 0 45px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1.3px;
+    background: #3ebe2b url(assets/whatsapp-icon.png);
+    background-size: 45px 45px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 2px;
+    text-decoration: none;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+div.hr {
+    width: 89%;
+    height: 1px;
+    /*max-width: 800px;*/
+    margin: 21px auto;
+    background-color: #CFD8DC;
+}
+
+.hide {
+    display: none;
+}
+
+
+/*  Overrides   */
+md-select {
+    height: 44px;
+    line-height: 44px;
+    width: 89%;
+    max-width: 500px;
+    margin: 0px auto 0;
+    padding: 0px 21px;
+    color: #263238;
+    font-size: 14px;
+    text-align: left;
+    border: 1px solid #B0BEC5;
+    border-radius: 3px;
+    background: transparent;
+    box-sizing: border-box;
+    outline: none;
+}
+md-select .md-select-value {
+    height: 44px;
+    line-height: 44px;
+    padding: 0;
+    border-bottom-width: 0px;
+    box-sizing: border-box;
+}
+md-select.md-default-theme:not([disabled]):focus .md-select-value, 
+md-select:not([disabled]):focus .md-select-value {
+    color: inherit;
+    border-bottom-color: transparent;
+}
+
+md-checkbox {
+    display: block;
+    width: 80vw;
+    max-width: 500px;
+    margin: 5px auto 5px;
+    font-size: 12px;
+    color: #607D8B;
+}
+md-checkbox .md-label {
+    line-height: 16px;
+    color: #607D8B;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: justify;
+}
+md-checkbox .md-container {
+    top: 0; 
+    -webkit-transform: translateY(0); 
+    transform: translateY(0); 
+}
+md-checkbox.md-default-theme.md-checked .md-icon, 
+md-checkbox.md-checked .md-icon {
+    background-color: #26A69A;
+}
+md-checkbox.md-default-theme.md-checked .md-ink-ripple,
+md-checkbox.md-checked .md-ink-ripple {
+    color: #26A69A;
+}
+md-checkbox:last-of-type {
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
